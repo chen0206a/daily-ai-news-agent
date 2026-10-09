@@ -1,0 +1,12 @@
+.git
+.env
+.venv
+.npm-cache
+data
+evidence
+frontend/node_modules
+frontend/.next
+frontend/test-results
+**/__pycache__
+**/.pytest_cache
+**/*.egg-info

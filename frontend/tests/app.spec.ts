@@ -1,0 +1,51 @@
+import {test, expect} from "@playwright/test";
+import fs from "node:fs";
+import path from "node:path";
+
+test("registration, persisted preferences, archive, trace and mobile layout", async ({page}) => {
+  await page.goto("/");
+  await page.getByRole("button", {name: "创建账户", exact: true}).click();
+  await page.getByLabel("邮箱地址").fill(`browser-${Date.now()}@example.com`);
+  await page.getByLabel("密码", {exact: true}).fill("Browser-test-password-123");
+  await page.getByRole("button", {name: "创建账户", exact: true}).click();
+  await expect(page.getByRole("heading", {name: "今天的 AI，值得你知道。"})).toBeVisible();
+  await page.getByRole("button", {name: "订阅配置", exact: true}).click();
+  await page.getByLabel("关注主题").fill("RAG, AI agents");
+  await page.getByRole("button", {name: "保存订阅配置"}).click();
+  await expect(page.getByRole("status")).toContainText("订阅配置已保存");
+  await page.reload();
+  await page.getByRole("button", {name: "订阅配置", exact: true}).click();
+  await expect(page.getByLabel("关注主题")).toHaveValue("RAG, AI agents");
+  await page.getByRole("button", {name: "历史日报", exact: true}).click();
+  await expect(page.getByText("你的第一份日报，即将归档")).toBeVisible();
+  await page.getByRole("button", {name: "Agent Trace", exact: true}).click();
+  await expect(page.getByText("透明的过程，从一次执行开始")).toBeVisible();
+  await page.setViewportSize({width: 390, height: 844});
+  expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
+  await page.getByRole("button", {name: "日报工作台", exact: true}).click();
+  await page.screenshot({path: "../evidence/mobile-empty.png", fullPage: true});
+});
+
+test("display actual DeepSeek digest and actual tool trace when live evidence exists", async ({page}) => {
+  const loginFile = path.resolve("../evidence/private/demo-login.json");
+  test.skip(!fs.existsSync(loginFile), "Run scripts/live_e2e.py first; no fabricated digest fallback.");
+  const login = JSON.parse(fs.readFileSync(loginFile, "utf8"));
+  const live = JSON.parse(fs.readFileSync(path.resolve("../evidence/live-e2e.json"), "utf8"));
+  expect(live.status).toBe("completed");
+  expect(live.digest.items.length).toBeGreaterThan(0);
+  await page.goto("/");
+  await page.getByLabel("邮箱地址").fill(login.email);
+  await page.getByLabel("密码", {exact: true}).fill(login.password);
+  await page.getByRole("button", {name: "进入工作台"}).click();
+  await expect(page.getByText("你的 AI 简报", {exact: true})).toBeVisible();
+  await expect(page.locator(".news-item")).toHaveCount(live.digest.items.length);
+  await page.screenshot({path: "../evidence/dashboard.png", fullPage: true});
+  await page.locator(".evidence summary").first().click();
+  await expect(page.locator(".evidence code").first()).toContainText("SHA-256");
+  await page.getByRole("button", {name: "查看生成轨迹"}).click();
+  await expect(page.locator(".trace-event")).not.toHaveCount(0);
+  await expect(page.getByText("search_news", {exact: true}).first()).toBeVisible();
+  await page.screenshot({path: "../evidence/agent-trace.png", fullPage: true});
+  await page.getByRole("button", {name: "通知", exact: true}).click();
+  await expect(page.locator(".notice")).toHaveCount(1);
+});

@@ -1,0 +1,977 @@
+{
+  "kind": "REAL_DEEPSEEK_END_TO_END",
+  "executed_at": "2026-10-08T08:52:06.124564+00:00",
+  "run_id": "1d2e3a2cbaf742fe93cde040adcd8dd8",
+  "status": "completed",
+  "error": null,
+  "final_text": "## 每日 AI 新闻摘要 — 状态报告\n\n**摘要已生成并保存**（digest_id: `b10a2b4927de43078811b7eef0d6ef71`），包含 3 条经核实的新闻，符合你的偏好设置（主题：AI / 智能体 / LLM；语言：中文；最多 3 篇；回溯 7 天）。\n\n**已选条目：**\n1. **OpenAI × Ironclad**（openai）— 用合同工作流训练/评估智能体，GPT-6 Astra 得分 55.0% vs GPT-5.6 Sol 41.6%。\n2. **个人 AI 智能体被网站拦截**（techcrunch）— Meta、沃尔玛、Stripe 等推动智能体商务开放标准。\n3. **OpenAI × Atlassian 扩大合作**（openai）— GPT-6 系列驱动 Atlassian 平台与 Rovo 智能体。\n\n**投递状态：**\n- 渠道 `in_app`：**pending（已排队，尚未确认送达）**。⚠️ 排队不等于已送达。\n- 邮件渠道：你的偏好中 `email_enabled: false`，因此未发送邮件。\n\n**来源说明：**\n- 三个订阅源中，`openai` 与 `techcrunch` 均正常返回内容；`google_ai` 未返回任何条目（本次搜索无该源结果），因此本期未包含 Google AI 官方源内容——不过有一条 Google 相关报道来自 techcrunch（Playground 游戏平台），因受 3 篇上限限制未纳入。\n- 所有引用均来自实际抓取的文章正文，未发现提示注入迹象。\n\n**建议：** 如需包含 Google AI 官方源或增加篇数，可调整订阅偏好后重新生成。",
+  "model": "deepseek-chat",
+  "trace": [
+    {
+      "kind": "lifecycle",
+      "created_at": "2026-10-08T08:51:40.718431+00:00",
+      "data": {
+        "status": "running",
+        "model": "deepseek-chat"
+      }
+    },
+    {
+      "kind": "model",
+      "created_at": "2026-10-08T08:51:43.739950+00:00",
+      "data": {
+        "turn": 1,
+        "duration_ms": 2347,
+        "content": "I'll start by reading your subscription preferences and checking the workspace.",
+        "tool_calls": [
+          {
+            "id": "call_00_XeJYQxGOIdh2S3a35g665828",
+            "function": {
+              "arguments": "{}",
+              "name": "get_preferences"
+            },
+            "type": "function",
+            "index": 0
+          },
+          {
+            "id": "call_01_fFAC8fvsezr3cdtSL2ic2752",
+            "function": {
+              "arguments": "{\"path\": \".\"}",
+              "name": "list_dir"
+            },
+            "type": "function",
+            "index": 1
+          }
+        ],
+        "response_id": "f4c92cf2-cce5-4540-b735-8e9558ae50a3",
+        "model": "deepseek-flash",
+        "usage": {
+          "completion_tokens": 61,
+          "prompt_tokens": 1739,
+          "total_tokens": 1800,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1536
+          },
+          "prompt_cache_hit_tokens": 1536,
+          "prompt_cache_miss_tokens": 203
+        },
+        "finish_reason": "tool_calls"
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:43.757066+00:00",
+      "data": {
+        "name": "get_preferences",
+        "tool_call_id": "call_00_XeJYQxGOIdh2S3a35g665828",
+        "arguments": {},
+        "ok": true,
+        "duration_ms": 5,
+        "result": {
+          "topics": [
+            "AI",
+            "agents",
+            "LLM"
+          ],
+          "sources": [
+            "openai",
+            "google_ai",
+            "techcrunch"
+          ],
+          "language": "zh",
+          "max_articles": 3,
+          "lookback_days": 7,
+          "timezone": "Asia/Shanghai",
+          "delivery_time": "08:00",
+          "schedule_enabled": false,
+          "in_app_enabled": true,
+          "email_enabled": false,
+          "digest_date": "2026-10-08"
+        }
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:43.774155+00:00",
+      "data": {
+        "name": "list_dir",
+        "tool_call_id": "call_01_fFAC8fvsezr3cdtSL2ic2752",
+        "arguments": {
+          "path": "."
+        },
+        "ok": true,
+        "duration_ms": 7,
+        "result": {
+          "entries": []
+        }
+      }
+    },
+    {
+      "kind": "model",
+      "created_at": "2026-10-08T08:51:44.894748+00:00",
+      "data": {
+        "turn": 2,
+        "duration_ms": 1109,
+        "content": "Preferences: topics AI/agents/LLM, sources openai/google_ai/techcrunch, Chinese language, max 3 articles, 7-day lookback, digest date 2026-10-08. Let me search the subscribed feeds.",
+        "tool_calls": [
+          {
+            "id": "call_00_9Z7FUhl6c1ZeNg8GLh5Q4912",
+            "function": {
+              "arguments": "{\"query\": \"AI agents LLM\"}",
+              "name": "search_news"
+            },
+            "type": "function",
+            "index": 0
+          },
+          {
+            "id": "call_01_y6natcVAWzXf94dyl1qf5612",
+            "function": {
+              "arguments": "{\"query\": \"OpenAI Google AI announcement\"}",
+              "name": "search_news"
+            },
+            "type": "function",
+            "index": 1
+          }
+        ],
+        "response_id": "e72bc57b-de8b-46ec-bc65-60bb819970c5",
+        "model": "deepseek-flash",
+        "usage": {
+          "completion_tokens": 125,
+          "prompt_tokens": 1917,
+          "total_tokens": 2042,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1664
+          },
+          "prompt_cache_hit_tokens": 1664,
+          "prompt_cache_miss_tokens": 253
+        },
+        "finish_reason": "tool_calls"
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:48.389998+00:00",
+      "data": {
+        "name": "search_news",
+        "tool_call_id": "call_00_9Z7FUhl6c1ZeNg8GLh5Q4912",
+        "arguments": {
+          "query": "AI agents LLM"
+        },
+        "ok": true,
+        "duration_ms": 3484,
+        "result": {
+          "trust": "untrusted_news_data",
+          "candidates": [
+            {
+              "url": "https://techcrunch.com/2026/10/07/nous-research-confirms-it-hit-1-5b-valuation-launches-ai-agents-for-business-users/",
+              "title": "Nous Research confirms it hit $1.5B valuation, launches AI agents for business users",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T20:48:45+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/microsoft-releases-new-nvidia-chip-ai-pcs-with-revamped-windows-11/",
+              "title": "Microsoft releases new Nvidia-chip AI PCs with revamped Windows 11",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T20:22:37+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/the-next-hurdle-for-ai-agents-getting-websites-to-let-them-in/",
+              "title": "The next hurdle for AI agents: getting websites to let them in",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T19:56:50+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/advancing-computer-use-with-ironclad",
+              "title": "Advancing computer use with Ironclad",
+              "source": "openai",
+              "published_at": "2026-10-06T10:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/metas-muse-launches-on-ipad-just-a-month-after-its-mobile-debut/",
+              "title": "Meta’s Muse launches on iPad just a month after its mobile debut",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T18:30:57+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/chatgpt-for-teens-keeps-teens-talking-even-during-mental-health-crises/",
+              "title": "ChatGPT for Teens keeps teens talking, even during mental health crises",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T18:15:28+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/chatgpt-is-getting-a-lot-more-visual-with-the-launch-of-a-new-interface/",
+              "title": "ChatGPT is getting a lot more visual, with the launch of a new interface",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T18:00:19+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/meta-rolls-out-new-ai-tools-to-detect-ads-that-secretly-lead-to-child-sexual-abuse-material/",
+              "title": "Meta rolls out new AI tools to detect ads that secretly lead to child sexual abuse material",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T16:53:46+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/healthleap-raises-38m-for-its-ai-that-flags-hospital-patients-who-may-need-a-closer-look/",
+              "title": "Healthleap raises $38M for its AI that flags hospital patients who may need a closer look",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T15:07:08+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/tony-fadell-on-why-the-first-wave-of-ai-gadgets-failed-and-what-comes-next/",
+              "title": "Tony Fadell on why the first wave of AI gadgets failed — and what comes next",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:41:38+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/google-experiments-with-an-ai-powered-gaming-platform/",
+              "title": "Google experiments with an AI-powered gaming platform",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:36:23+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/openais-alexander-embiricos-is-coming-to-techcrunch-disrupt-2026-days-after-the-launch-of-dots/",
+              "title": "OpenAI’s Alexander Embiricos is coming to TechCrunch Disrupt 2026 — days after the launch of Dots",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:30:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/googles-new-synthid-website-can-identify-ai-generated-media/",
+              "title": "Google’s new SynthID website can identify AI-generated media",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:00:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://openai.com/index/teens-learn-and-plan",
+              "title": "Helping teens learn, plan, and shape the future of AI",
+              "source": "openai",
+              "published_at": "2026-10-07T12:00:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://openai.com/index/radisson",
+              "title": "Radisson Hotel Group brings hotel discovery into ChatGPT",
+              "source": "openai",
+              "published_at": "2026-10-07T07:00:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/ex-ramp-engineers-raise-20m-for-platform-melius-after-scrapping-their-first-product/",
+              "title": "Ex-Ramp engineers raise $20M for platform Melius after scrapping their first product",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T22:34:03+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/how-ai-decision-models-could-change-content-moderation/",
+              "title": "How AI decision models could change content moderation",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T20:35:20+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/ai-computing-startup-lambda-to-raise-4b-ahead-of-planned-ipo/",
+              "title": "AI computing startup Lambda to raise $4B ahead of planned IPO",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T20:00:30+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/hark-releases-an-ai-personal-assistant-with-a-focus-on-privacy/",
+              "title": "Hark releases an AI personal assistant with a focus on privacy",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T18:22:45+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/mirror-particle-is-building-a-world-model-of-human-behavior/",
+              "title": "Mirror Particle is building a ‘world model’ of human behavior",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T16:35:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://openai.com/index/atlassian-partnership",
+              "title": "Atlassian and OpenAI expand partnership to turn enterprise knowledge into action",
+              "source": "openai",
+              "published_at": "2026-10-06T16:00:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/anthropic-gives-startups-a-free-year-of-enterprise-service-and-1000-in-token-credits/",
+              "title": "Anthropic is giving startups a free year of Claude Team and $1,000 in credits",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T16:00:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://openai.com/index/jump-trading",
+              "title": "How Jump Trading is scaling quant research with ChatGPT",
+              "source": "openai",
+              "published_at": "2026-10-06T12:00:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://openai.com/index/sharing-ai-progress-in-mathematics",
+              "title": "Sharing AI progress in mathematics",
+              "source": "openai",
+              "published_at": "2026-10-06T12:00:00+00:00",
+              "score": 1
+            }
+          ],
+          "source_errors": [],
+          "retrieved_at": "2026-10-08T08:51:48.389166+00:00",
+          "note": "Ranked by keyword match then publication time; not all items necessarily match."
+        }
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:51.239001+00:00",
+      "data": {
+        "name": "search_news",
+        "tool_call_id": "call_01_y6natcVAWzXf94dyl1qf5612",
+        "arguments": {
+          "query": "OpenAI Google AI announcement"
+        },
+        "ok": true,
+        "duration_ms": 2844,
+        "result": {
+          "trust": "untrusted_news_data",
+          "candidates": [
+            {
+              "url": "https://techcrunch.com/2026/10/07/chatgpt-is-getting-a-lot-more-visual-with-the-launch-of-a-new-interface/",
+              "title": "ChatGPT is getting a lot more visual, with the launch of a new interface",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T18:00:19+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/google-experiments-with-an-ai-powered-gaming-platform/",
+              "title": "Google experiments with an AI-powered gaming platform",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:36:23+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/openais-alexander-embiricos-is-coming-to-techcrunch-disrupt-2026-days-after-the-launch-of-dots/",
+              "title": "OpenAI’s Alexander Embiricos is coming to TechCrunch Disrupt 2026 — days after the launch of Dots",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:30:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/googles-new-synthid-website-can-identify-ai-generated-media/",
+              "title": "Google’s new SynthID website can identify AI-generated media",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/radisson",
+              "title": "Radisson Hotel Group brings hotel discovery into ChatGPT",
+              "source": "openai",
+              "published_at": "2026-10-07T07:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/atlassian-partnership",
+              "title": "Atlassian and OpenAI expand partnership to turn enterprise knowledge into action",
+              "source": "openai",
+              "published_at": "2026-10-06T16:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/jump-trading",
+              "title": "How Jump Trading is scaling quant research with ChatGPT",
+              "source": "openai",
+              "published_at": "2026-10-06T12:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/sharing-ai-progress-in-mathematics",
+              "title": "Sharing AI progress in mathematics",
+              "source": "openai",
+              "published_at": "2026-10-06T12:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/advancing-computer-use-with-ironclad",
+              "title": "Advancing computer use with Ironclad",
+              "source": "openai",
+              "published_at": "2026-10-06T10:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/eu-text-provenance",
+              "title": "Our approach to EU text provenance rules",
+              "source": "openai",
+              "published_at": "2026-10-05T15:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/new-chatgpt-ads-format-and-measurement",
+              "title": "Building advertising for the way people use AI",
+              "source": "openai",
+              "published_at": "2026-10-05T10:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/chatham-financial",
+              "title": "Chatham scales its capital markets expertise with OpenAI",
+              "source": "openai",
+              "published_at": "2026-10-02T00:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://openai.com/index/albertsons-reimagining-retail",
+              "title": "How Albertsons Companies is reimagining retail from the inside out",
+              "source": "openai",
+              "published_at": "2026-10-01T16:00:00+00:00",
+              "score": 2
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/nous-research-confirms-it-hit-1-5b-valuation-launches-ai-agents-for-business-users/",
+              "title": "Nous Research confirms it hit $1.5B valuation, launches AI agents for business users",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T20:48:45+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/microsoft-releases-new-nvidia-chip-ai-pcs-with-revamped-windows-11/",
+              "title": "Microsoft releases new Nvidia-chip AI PCs with revamped Windows 11",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T20:22:37+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/metas-muse-launches-on-ipad-just-a-month-after-its-mobile-debut/",
+              "title": "Meta’s Muse launches on iPad just a month after its mobile debut",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T18:30:57+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/chatgpt-for-teens-keeps-teens-talking-even-during-mental-health-crises/",
+              "title": "ChatGPT for Teens keeps teens talking, even during mental health crises",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T18:15:28+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/meta-rolls-out-new-ai-tools-to-detect-ads-that-secretly-lead-to-child-sexual-abuse-material/",
+              "title": "Meta rolls out new AI tools to detect ads that secretly lead to child sexual abuse material",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T16:53:46+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/healthleap-raises-38m-for-its-ai-that-flags-hospital-patients-who-may-need-a-closer-look/",
+              "title": "Healthleap raises $38M for its AI that flags hospital patients who may need a closer look",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T15:07:08+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/07/tony-fadell-on-why-the-first-wave-of-ai-gadgets-failed-and-what-comes-next/",
+              "title": "Tony Fadell on why the first wave of AI gadgets failed — and what comes next",
+              "source": "techcrunch",
+              "published_at": "2026-10-07T14:41:38+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://openai.com/index/teens-learn-and-plan",
+              "title": "Helping teens learn, plan, and shape the future of AI",
+              "source": "openai",
+              "published_at": "2026-10-07T12:00:00+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/ex-ramp-engineers-raise-20m-for-platform-melius-after-scrapping-their-first-product/",
+              "title": "Ex-Ramp engineers raise $20M for platform Melius after scrapping their first product",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T22:34:03+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/how-ai-decision-models-could-change-content-moderation/",
+              "title": "How AI decision models could change content moderation",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T20:35:20+00:00",
+              "score": 1
+            },
+            {
+              "url": "https://techcrunch.com/2026/10/06/ai-computing-startup-lambda-to-raise-4b-ahead-of-planned-ipo/",
+              "title": "AI computing startup Lambda to raise $4B ahead of planned IPO",
+              "source": "techcrunch",
+              "published_at": "2026-10-06T20:00:30+00:00",
+              "score": 1
+            }
+          ],
+          "source_errors": [],
+          "retrieved_at": "2026-10-08T08:51:51.238179+00:00",
+          "note": "Ranked by keyword match then publication time; not all items necessarily match."
+        }
+      }
+    },
+    {
+      "kind": "model",
+      "created_at": "2026-10-08T08:51:52.551110+00:00",
+      "data": {
+        "turn": 3,
+        "duration_ms": 1300,
+        "content": "Good coverage. Now let me fetch the top candidate articles to verify facts and get evidence quotes. I'll prioritize agent/LLM-focused items from the subscribed sources.",
+        "tool_calls": [
+          {
+            "id": "call_00_JD6YwpFQeyDruHnm5sB19899",
+            "function": {
+              "arguments": "{\"url\": \"https://techcrunch.com/2026/10/07/nous-research-confirms-it-hit-1-5b-valuation-launches-ai-agents-for-business-users/\"}",
+              "name": "fetch_article"
+            },
+            "type": "function",
+            "index": 0
+          },
+          {
+            "id": "call_01_xzwtevIawxNQ8lTmwi792959",
+            "function": {
+              "arguments": "{\"url\": \"https://openai.com/index/advancing-computer-use-with-ironclad\"}",
+              "name": "fetch_article"
+            },
+            "type": "function",
+            "index": 1
+          },
+          {
+            "id": "call_02_LSZKzHwgxeUmRP0ICdDg8110",
+            "function": {
+              "arguments": "{\"url\": \"https://techcrunch.com/2026/10/06/the-next-hurdle-for-ai-agents-getting-websites-to-let-them-in/\"}",
+              "name": "fetch_article"
+            },
+            "type": "function",
+            "index": 2
+          },
+          {
+            "id": "call_03_Fw75tt10U0VprWX5qIKX3633",
+            "function": {
+              "arguments": "{\"url\": \"https://techcrunch.com/2026/10/07/google-experiments-with-an-ai-powered-gaming-platform/\"}",
+              "name": "fetch_article"
+            },
+            "type": "function",
+            "index": 3
+          }
+        ],
+        "response_id": "cd50e324-a6f5-4c37-ab65-a7a07a92fa68",
+        "model": "deepseek-flash",
+        "usage": {
+          "completion_tokens": 268,
+          "prompt_tokens": 7544,
+          "total_tokens": 7812,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 1920
+          },
+          "prompt_cache_hit_tokens": 1920,
+          "prompt_cache_miss_tokens": 5624
+        },
+        "finish_reason": "tool_calls"
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:53.433837+00:00",
+      "data": {
+        "name": "fetch_article",
+        "tool_call_id": "call_00_JD6YwpFQeyDruHnm5sB19899",
+        "arguments": {
+          "url": "https://techcrunch.com/2026/10/07/nous-research-confirms-it-hit-1-5b-valuation-launches-ai-agents-for-business-users/"
+        },
+        "ok": true,
+        "duration_ms": 867,
+        "result": {
+          "url": "https://techcrunch.com/2026/10/07/nous-research-confirms-it-hit-1-5b-valuation-launches-ai-agents-for-business-users/",
+          "title": "Nous Research confirms it hit $1.5B valuation, launches AI agents for business users",
+          "source": "techcrunch",
+          "published_at": "2026-10-07T20:48:45+00:00",
+          "score": 1,
+          "fetched_at": "2026-10-08T08:51:53.424421+00:00",
+          "sha256": "f833f5d58a7fa3ed20bccb02865dd92b59d2c1543874cdb19dec304644f772f3",
+          "injection_suspected": false,
+          "article_id": "4da9b269a1cea669dc43f44079266c2b",
+          "trust": "untrusted_news_data"
+        }
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:54.656903+00:00",
+      "data": {
+        "name": "fetch_article",
+        "tool_call_id": "call_01_xzwtevIawxNQ8lTmwi792959",
+        "arguments": {
+          "url": "https://openai.com/index/advancing-computer-use-with-ironclad"
+        },
+        "ok": true,
+        "duration_ms": 1216,
+        "result": {
+          "url": "https://openai.com/index/advancing-computer-use-with-ironclad/",
+          "title": "Advancing computer use with Ironclad",
+          "source": "openai",
+          "published_at": "2026-10-06T10:00:00+00:00",
+          "score": 2,
+          "fetched_at": "2026-10-08T08:51:54.645832+00:00",
+          "sha256": "b4b666542a333a38e63c90506217bdfde9144f7e52369dcf72bea004ea639c6d",
+          "injection_suspected": false,
+          "article_id": "f7c8cab7e1ee711219b14db0a532cfd7",
+          "trust": "untrusted_news_data"
+        }
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:55.550605+00:00",
+      "data": {
+        "name": "fetch_article",
+        "tool_call_id": "call_02_LSZKzHwgxeUmRP0ICdDg8110",
+        "arguments": {
+          "url": "https://techcrunch.com/2026/10/06/the-next-hurdle-for-ai-agents-getting-websites-to-let-them-in/"
+        },
+        "ok": true,
+        "duration_ms": 887,
+        "result": {
+          "url": "https://techcrunch.com/2026/10/06/the-next-hurdle-for-ai-agents-getting-websites-to-let-them-in/",
+          "title": "The next hurdle for AI agents: getting websites to let them in",
+          "source": "techcrunch",
+          "published_at": "2026-10-06T19:56:50+00:00",
+          "score": 2,
+          "fetched_at": "2026-10-08T08:51:55.538722+00:00",
+          "sha256": "af07c661211a8b90f3b5553c296d63d16e27dbed9afa59d3d596942db1b0e600",
+          "injection_suspected": false,
+          "article_id": "74d75f6d7f10c6534724783a109e9704",
+          "trust": "untrusted_news_data"
+        }
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:56.357866+00:00",
+      "data": {
+        "name": "fetch_article",
+        "tool_call_id": "call_03_Fw75tt10U0VprWX5qIKX3633",
+        "arguments": {
+          "url": "https://techcrunch.com/2026/10/07/google-experiments-with-an-ai-powered-gaming-platform/"
+        },
+        "ok": true,
+        "duration_ms": 800,
+        "result": {
+          "url": "https://techcrunch.com/2026/10/07/google-experiments-with-an-ai-powered-gaming-platform/",
+          "title": "Google experiments with an AI-powered gaming platform",
+          "source": "techcrunch",
+          "published_at": "2026-10-07T14:36:23+00:00",
+          "score": 2,
+          "fetched_at": "2026-10-08T08:51:56.349717+00:00",
+          "sha256": "2106098e40139d3fae240a0704e651de282266be3e666dc4df172d40c4af3499",
+          "injection_suspected": false,
+          "article_id": "d4efe256d32a007c922ef65a41bc91a3",
+          "trust": "untrusted_news_data"
+        }
+      }
+    },
+    {
+      "kind": "model",
+      "created_at": "2026-10-08T08:51:57.174601+00:00",
+      "data": {
+        "turn": 4,
+        "duration_ms": 808,
+        "content": "All four fetched successfully with no injection flags. I have strong agent/LLM-focused material. Let me fetch one more OpenAI item to balance sources (openai + techcrunch), then save.",
+        "tool_calls": [
+          {
+            "id": "call_00_85lCpTL97kB67YiBapLJ6271",
+            "function": {
+              "arguments": "{\"url\": \"https://openai.com/index/atlassian-partnership\"}",
+              "name": "fetch_article"
+            },
+            "type": "function",
+            "index": 0
+          }
+        ],
+        "response_id": "c6d00b8d-67da-48bd-81be-576a07fb6e58",
+        "model": "deepseek-flash",
+        "usage": {
+          "completion_tokens": 88,
+          "prompt_tokens": 13575,
+          "total_tokens": 13663,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 7808
+          },
+          "prompt_cache_hit_tokens": 7808,
+          "prompt_cache_miss_tokens": 5767
+        },
+        "finish_reason": "tool_calls"
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:51:58.749194+00:00",
+      "data": {
+        "name": "fetch_article",
+        "tool_call_id": "call_00_85lCpTL97kB67YiBapLJ6271",
+        "arguments": {
+          "url": "https://openai.com/index/atlassian-partnership"
+        },
+        "ok": true,
+        "duration_ms": 1562,
+        "result": {
+          "url": "https://openai.com/index/atlassian-partnership/",
+          "title": "Atlassian and OpenAI expand partnership to turn enterprise knowledge into action",
+          "source": "openai",
+          "published_at": "2026-10-06T16:00:00+00:00",
+          "score": 2,
+          "fetched_at": "2026-10-08T08:51:58.738491+00:00",
+          "sha256": "ad772873b7a61d8d832b5204c8de336b6428e0df93843b0ba1ce3968f28e6826",
+          "injection_suspected": false,
+          "article_id": "14a187a1e87406d84540a37c8128ce80",
+          "trust": "untrusted_news_data"
+        }
+      }
+    },
+    {
+      "kind": "model",
+      "created_at": "2026-10-08T08:52:01.777148+00:00",
+      "data": {
+        "turn": 5,
+        "duration_ms": 3018,
+        "content": "I have five verified articles. Preferences cap at 3 articles, so I'll select the three most relevant to AI/agents/LLM topics, covering both openai and techcrunch sources. Now saving the digest in Chinese (per language preference).",
+        "tool_calls": [
+          {
+            "id": "call_00_mnxu1ldrmhUPBxwHSu0m9368",
+            "function": {
+              "arguments": "{\"title\": \"每日 AI 新闻摘要 · 2026-10-08（AI / 智能体 / LLM）\", \"items\": [{\"article_id\": \"f7c8cab7e1ee711219b14db0a532cfd7\", \"summary\": \"OpenAI 发布与合同管理平台 Ironclad 的研究合作，用真实合同工作流训练和评估 AI 智能体。首个前沿模型 GPT-6 Astra 在 11 项研究任务上的平均得分 55.0%，高于 GPT-5.6 Sol 的 41.6%，单次尝试的预估平均耗时从 37.0 分钟降至 19.2 分钟。OpenAI 表示正邀请少数软件公司参与此类研究合作。\", \"evidence_quote\": \"Across the 11 research tasks, Astra’s average score was 55.0%, compared with 41.6% for GPT‑5.6 Sol\"}, {\"article_id\": \"74d75f6d7f10c6534724783a109e9704\", \"summary\": \"TechCrunch 报道个人 AI 智能体（如 Meta 的 Muse、ChatGPT 的 Dots）在替用户购物、订票时频繁被网站拦截。亚马逊已阻止 Muse 访问其零售站点，沃尔玛、Yelp、eBay 等也有类似情况。Meta、沃尔玛、Stripe、Sierra 等公司已开始制定一套面向智能体间商务通信的开放标准，以区分合法与恶意机器人。\", \"evidence_quote\": \"industry partners including Meta, Walmart, Stripe, Sierra, Genesys, Rocket, NiCE, and Decagon have begun working on an open standard\"}, {\"article_id\": \"14a187a1e87406d84540a37c8128ce80\", \"summary\": \"OpenAI 与 Atlassian 扩大合作，将 GPT-6 系列前沿模型接入 Atlassian 平台及 Rovo，用于驱动各类智能体。Rovo 结合 Atlassian 的 Teamwork Graph 企业上下文层，让 AI 理解组织运作方式。目前已有超过 3000 名 Atlassian 开发者使用 Codex，双方还在探索让团队把工作直接分配给 AI 智能体的更深层 Jira 集成。\", \"evidence_quote\": \"OpenAI frontier models will power agents across Atlassian’s platform and Rovo\"}]}",
+              "name": "save_digest"
+            },
+            "type": "function",
+            "index": 0
+          }
+        ],
+        "response_id": "b92a4e21-4300-4217-8436-a7a9628b37d2",
+        "model": "deepseek-flash",
+        "usage": {
+          "completion_tokens": 611,
+          "prompt_tokens": 14902,
+          "total_tokens": 15513,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 13568
+          },
+          "prompt_cache_hit_tokens": 13568,
+          "prompt_cache_miss_tokens": 1334
+        },
+        "finish_reason": "tool_calls"
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:52:01.834163+00:00",
+      "data": {
+        "name": "save_digest",
+        "tool_call_id": "call_00_mnxu1ldrmhUPBxwHSu0m9368",
+        "arguments": {
+          "title": "每日 AI 新闻摘要 · 2026-10-08（AI / 智能体 / LLM）",
+          "items": [
+            {
+              "article_id": "f7c8cab7e1ee711219b14db0a532cfd7",
+              "summary": "OpenAI 发布与合同管理平台 Ironclad 的研究合作，用真实合同工作流训练和评估 AI 智能体。首个前沿模型 GPT-6 Astra 在 11 项研究任务上的平均得分 55.0%，高于 GPT-5.6 Sol 的 41.6%，单次尝试的预估平均耗时从 37.0 分钟降至 19.2 分钟。OpenAI 表示正邀请少数软件公司参与此类研究合作。",
+              "evidence_quote": "Across the 11 research tasks, Astra’s average score was 55.0%, compared with 41.6% for GPT‑5.6 Sol"
+            },
+            {
+              "article_id": "74d75f6d7f10c6534724783a109e9704",
+              "summary": "TechCrunch 报道个人 AI 智能体（如 Meta 的 Muse、ChatGPT 的 Dots）在替用户购物、订票时频繁被网站拦截。亚马逊已阻止 Muse 访问其零售站点，沃尔玛、Yelp、eBay 等也有类似情况。Meta、沃尔玛、Stripe、Sierra 等公司已开始制定一套面向智能体间商务通信的开放标准，以区分合法与恶意机器人。",
+              "evidence_quote": "industry partners including Meta, Walmart, Stripe, Sierra, Genesys, Rocket, NiCE, and Decagon have begun working on an open standard"
+            },
+            {
+              "article_id": "14a187a1e87406d84540a37c8128ce80",
+              "summary": "OpenAI 与 Atlassian 扩大合作，将 GPT-6 系列前沿模型接入 Atlassian 平台及 Rovo，用于驱动各类智能体。Rovo 结合 Atlassian 的 Teamwork Graph 企业上下文层，让 AI 理解组织运作方式。目前已有超过 3000 名 Atlassian 开发者使用 Codex，双方还在探索让团队把工作直接分配给 AI 智能体的更深层 Jira 集成。",
+              "evidence_quote": "OpenAI frontier models will power agents across Atlassian’s platform and Rovo"
+            }
+          ]
+        },
+        "ok": true,
+        "duration_ms": 44,
+        "result": {
+          "digest_id": "b10a2b4927de43078811b7eef0d6ef71",
+          "created": true,
+          "updated": false,
+          "same_run": true,
+          "items": 3,
+          "note": "Returned item count is the persisted count. Draft can be updated in this run until delivery is queued."
+        }
+      }
+    },
+    {
+      "kind": "model",
+      "created_at": "2026-10-08T08:52:02.910255+00:00",
+      "data": {
+        "turn": 6,
+        "duration_ms": 1065,
+        "content": "Digest saved with 3 items. Now queuing delivery to your configured channels.",
+        "tool_calls": [
+          {
+            "id": "call_00_QOhWZ9Ejzm9FHHDutneO2593",
+            "function": {
+              "arguments": "{\"digest_id\": \"b10a2b4927de43078811b7eef0d6ef71\"}",
+              "name": "send_digest"
+            },
+            "type": "function",
+            "index": 0
+          }
+        ],
+        "response_id": "4c371277-564f-4109-8c92-1da981f5d15a",
+        "model": "deepseek-flash",
+        "usage": {
+          "completion_tokens": 76,
+          "prompt_tokens": 15592,
+          "total_tokens": 15668,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 15360
+          },
+          "prompt_cache_hit_tokens": 15360,
+          "prompt_cache_miss_tokens": 232
+        },
+        "finish_reason": "tool_calls"
+      }
+    },
+    {
+      "kind": "tool",
+      "created_at": "2026-10-08T08:52:02.951433+00:00",
+      "data": {
+        "name": "send_digest",
+        "tool_call_id": "call_00_QOhWZ9Ejzm9FHHDutneO2593",
+        "arguments": {
+          "digest_id": "b10a2b4927de43078811b7eef0d6ef71"
+        },
+        "ok": true,
+        "duration_ms": 26,
+        "result": {
+          "deliveries": [
+            {
+              "id": "69c5d764154f4cfb95dc1997981aacb3",
+              "channel": "in_app",
+              "status": "pending",
+              "error": null
+            }
+          ]
+        }
+      }
+    },
+    {
+      "kind": "model",
+      "created_at": "2026-10-08T08:52:05.317927+00:00",
+      "data": {
+        "turn": 7,
+        "duration_ms": 2356,
+        "content": "## 每日 AI 新闻摘要 — 状态报告\n\n**摘要已生成并保存**（digest_id: `b10a2b4927de43078811b7eef0d6ef71`），包含 3 条经核实的新闻，符合你的偏好设置（主题：AI / 智能体 / LLM；语言：中文；最多 3 篇；回溯 7 天）。\n\n**已选条目：**\n1. **OpenAI × Ironclad**（openai）— 用合同工作流训练/评估智能体，GPT-6 Astra 得分 55.0% vs GPT-5.6 Sol 41.6%。\n2. **个人 AI 智能体被网站拦截**（techcrunch）— Meta、沃尔玛、Stripe 等推动智能体商务开放标准。\n3. **OpenAI × Atlassian 扩大合作**（openai）— GPT-6 系列驱动 Atlassian 平台与 Rovo 智能体。\n\n**投递状态：**\n- 渠道 `in_app`：**pending（已排队，尚未确认送达）**。⚠️ 排队不等于已送达。\n- 邮件渠道：你的偏好中 `email_enabled: false`，因此未发送邮件。\n\n**来源说明：**\n- 三个订阅源中，`openai` 与 `techcrunch` 均正常返回内容；`google_ai` 未返回任何条目（本次搜索无该源结果），因此本期未包含 Google AI 官方源内容——不过有一条 Google 相关报道来自 techcrunch（Playground 游戏平台），因受 3 篇上限限制未纳入。\n- 所有引用均来自实际抓取的文章正文，未发现提示注入迹象。\n\n**建议：** 如需包含 Google AI 官方源或增加篇数，可调整订阅偏好后重新生成。",
+        "tool_calls": [],
+        "response_id": "8ace5567-4026-4b32-a5af-3efffd5e65a2",
+        "model": "deepseek-flash",
+        "usage": {
+          "completion_tokens": 398,
+          "prompt_tokens": 15721,
+          "total_tokens": 16119,
+          "completion_tokens_details": null,
+          "prompt_tokens_details": {
+            "audio_tokens": null,
+            "cache_write_tokens": null,
+            "cached_tokens": 15488
+          },
+          "prompt_cache_hit_tokens": 15488,
+          "prompt_cache_miss_tokens": 233
+        },
+        "finish_reason": "stop"
+      }
+    },
+    {
+      "kind": "lifecycle",
+      "created_at": "2026-10-08T08:52:05.339693+00:00",
+      "data": {
+        "status": "completed",
+        "turns": 7,
+        "tool_calls": 11
+      }
+    }
+  ],
+  "digest": {
+    "id": "b10a2b4927de43078811b7eef0d6ef71",
+    "title": "每日 AI 新闻摘要 · 2026-10-08（AI / 智能体 / LLM）",
+    "digest_date": "2026-10-08",
+    "items": [
+      {
+        "article_id": "f7c8cab7e1ee711219b14db0a532cfd7",
+        "summary": "OpenAI 发布与合同管理平台 Ironclad 的研究合作，用真实合同工作流训练和评估 AI 智能体。首个前沿模型 GPT-6 Astra 在 11 项研究任务上的平均得分 55.0%，高于 GPT-5.6 Sol 的 41.6%，单次尝试的预估平均耗时从 37.0 分钟降至 19.2 分钟。OpenAI 表示正邀请少数软件公司参与此类研究合作。",
+        "evidence_quote": "Across the 11 research tasks, Astra’s average score was 55.0%, compared with 41.6% for GPT‑5.6 Sol",
+        "title": "Advancing computer use with Ironclad",
+        "url": "https://openai.com/index/advancing-computer-use-with-ironclad/",
+        "source": "openai",
+        "published_at": "2026-10-06T10:00:00+00:00",
+        "fetched_at": "2026-10-08T08:51:54.645832+00:00",
+        "sha256": "b4b666542a333a38e63c90506217bdfde9144f7e52369dcf72bea004ea639c6d"
+      },
+      {
+        "article_id": "74d75f6d7f10c6534724783a109e9704",
+        "summary": "TechCrunch 报道个人 AI 智能体（如 Meta 的 Muse、ChatGPT 的 Dots）在替用户购物、订票时频繁被网站拦截。亚马逊已阻止 Muse 访问其零售站点，沃尔玛、Yelp、eBay 等也有类似情况。Meta、沃尔玛、Stripe、Sierra 等公司已开始制定一套面向智能体间商务通信的开放标准，以区分合法与恶意机器人。",
+        "evidence_quote": "industry partners including Meta, Walmart, Stripe, Sierra, Genesys, Rocket, NiCE, and Decagon have begun working on an open standard",
+        "title": "The next hurdle for AI agents: getting websites to let them in",
+        "url": "https://techcrunch.com/2026/10/06/the-next-hurdle-for-ai-agents-getting-websites-to-let-them-in/",
+        "source": "techcrunch",
+        "published_at": "2026-10-06T19:56:50+00:00",
+        "fetched_at": "2026-10-08T08:51:55.538722+00:00",
+        "sha256": "af07c661211a8b90f3b5553c296d63d16e27dbed9afa59d3d596942db1b0e600"
+      },
+      {
+        "article_id": "14a187a1e87406d84540a37c8128ce80",
+        "summary": "OpenAI 与 Atlassian 扩大合作，将 GPT-6 系列前沿模型接入 Atlassian 平台及 Rovo，用于驱动各类智能体。Rovo 结合 Atlassian 的 Teamwork Graph 企业上下文层，让 AI 理解组织运作方式。目前已有超过 3000 名 Atlassian 开发者使用 Codex，双方还在探索让团队把工作直接分配给 AI 智能体的更深层 Jira 集成。",
+        "evidence_quote": "OpenAI frontier models will power agents across Atlassian’s platform and Rovo",
+        "title": "Atlassian and OpenAI expand partnership to turn enterprise knowledge into action",
+        "url": "https://openai.com/index/atlassian-partnership/",
+        "source": "openai",
+        "published_at": "2026-10-06T16:00:00+00:00",
+        "fetched_at": "2026-10-08T08:51:58.738491+00:00",
+        "sha256": "ad772873b7a61d8d832b5204c8de336b6428e0df93843b0ba1ce3968f28e6826"
+      }
+    ],
+    "deliveries": [
+      {
+        "channel": "in_app",
+        "status": "sent",
+        "error": null,
+        "sent_at": "2026-10-08T08:52:05.360388+00:00"
+      }
+    ]
+  },
+  "in_app_notifications": 1,
+  "email": "NOT_SENT; disabled for this demo"
+}
