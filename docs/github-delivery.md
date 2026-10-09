@@ -27,7 +27,9 @@
 | 真实 DeepSeek | 7 轮模型调用、11 次工具执行 |
 | 日报与站内通知 | 3 条新闻、1 条通知 |
 
-以上来自 [保存的验收记录](../evidence/validation.md)。本次 GitHub 发布没有重新运行业务测试或真实模型，不将发布检查计入测试次数。
+以上来自 [保存的验收记录](../evidence/validation.md)。本次 GitHub 发布没有手动重跑这些本机验收或调用真实模型，不将发布检查计入历史测试次数。
+
+首次发布提交 `e6e7e0e00c633e494d46a88e77349789a15ba054` 触发的 [GitHub Actions quality #1](https://github.com/chen0206a/daily-ai-news-agent/actions/runs/37882356367) 已成功完成。该 CI 自动执行配置中的无模型密钥检查，不代表重新完成了私有演示账号依赖的真实模型浏览器场景。
 
 ## 复现与限制
 
