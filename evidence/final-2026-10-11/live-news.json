@@ -1,0 +1,321 @@
+{
+  "kind": "REAL_NETWORK_FETCH_NO_LLM",
+  "executed_at": "2026-10-11T08:24:50.022319+00:00",
+  "search": {
+    "trust": "untrusted_news_data",
+    "candidates": [
+      {
+        "url": "https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses/",
+        "title": "Google brings agentic AI to Gemini, starting with businesses",
+        "published_at": "2026-10-08T18:18:00+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 2,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/blog/agent-lightning-v1-0-a-3500-line-lightweight-agentic-rl-framework-for-training-agents-with-real-harnesses/",
+        "title": "Agent Lightning v1.0: A 3,500-Line Lightweight Agentic RL Framework for Training Agents with Real Harnesses",
+        "published_at": "2026-10-07T16:00:00+00:00",
+        "source": "microsoft_research",
+        "source_name": "Microsoft Research",
+        "score": 2,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/10/microsofts-satya-nadella-says-ai-models-need-an-emergency-brake/",
+        "title": "Microsoft’s Satya Nadella says AI models need an ‘emergency brake’",
+        "published_at": "2026-10-10T21:47:51+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/10/apple-discloses-deal-to-hire-team-and-license-tech-from-personalized-podcast-startup-huxe/",
+        "title": "Apple discloses deal to hire team and license tech from personalized podcast startup Huxe",
+        "published_at": "2026-10-10T19:50:00+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/10/all-the-ai-agents-that-can-live-in-your-text-messages/",
+        "title": "Here are the top AI agents that can live in your text messages",
+        "published_at": "2026-10-10T14:00:00+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/09/anthropic-cant-reliably-control-its-ai-agents-its-cutting-off-its-internal-evals-from-the-live-internet-instead/",
+        "title": "Anthropic can’t reliably control its AI agents. It’s cutting off its internal evals from the live internet instead",
+        "published_at": "2026-10-10T00:18:32+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/09/the-maker-of-non-text-ai-model-jev-valued-at-7-5b-just-weeks-after-launch/",
+        "title": "The maker of non-text AI model Jev valued at $7.5B just weeks after launch",
+        "published_at": "2026-10-09T21:41:29+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/09/an-anthropic-ai-model-sent-a-false-homicide-tip-to-philadelphia-police/",
+        "title": "An Anthropic AI model sent a false homicide tip to Philadelphia police",
+        "published_at": "2026-10-09T19:36:56+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/video/amazon-and-others-are-done-keeping-data-center-deals-secret-is-it-enough-to-build-trust/",
+        "title": "Amazon and others are done keeping data center deals secret. Is it enough to build trust?",
+        "published_at": "2026-10-09T16:56:42+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/podcast/amazon-drops-data-center-ndas-and-ai-agents-want-your-credit-card/",
+        "title": "Amazon drops data center NDAs, and AI agents want your credit card",
+        "published_at": "2026-10-09T16:53:02+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/09/we-cant-help-treating-ai-like-its-human-but-should-we/",
+        "title": "We can’t help treating AI like it’s human. But should we?",
+        "published_at": "2026-10-09T16:40:14+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/09/a16zs-olivia-moore-on-the-state-of-consumer-ai/",
+        "title": "a16z’s Olivia Moore on the state of consumer AI",
+        "published_at": "2026-10-09T15:43:33+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://openai.com/index/asana-browser-agent",
+        "title": "Asana cuts model costs 76x in browser tests with GPT-6.1 Sol",
+        "published_at": "2026-10-09T07:00:00+00:00",
+        "source": "openai",
+        "source_name": "OpenAI News",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/08/fired-openai-safety-researchers-dispute-misconduct-claims-warn-of-chilling-effect/",
+        "title": "Fired OpenAI safety researchers dispute misconduct claims, warn of chilling effect",
+        "published_at": "2026-10-08T20:04:26+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/08/ben-affleck-is-an-ai-nerd-and-the-internet-is-impressed/",
+        "title": "Ben Affleck is an AI nerd, and the internet is impressed",
+        "published_at": "2026-10-08T18:20:32+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/08/popular-ai-leaderboard-arena-nearly-doubles-valuation-to-3-1b-valuation-in-10-months/",
+        "title": "Popular AI leaderboard Arena nearly doubles valuation to $3.1B valuation in 10 months",
+        "published_at": "2026-10-08T18:19:45+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://techcrunch.com/2026/10/08/openais-revenue-is-reportedly-20-billion-less-than-previously-projected/",
+        "title": "OpenAI’s revenue is reportedly $20 billion less than previously projected",
+        "published_at": "2026-10-08T18:19:42+00:00",
+        "source": "techcrunch",
+        "source_name": "TechCrunch AI",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://openai.com/index/pollo-ai",
+        "title": "Pollo AI turns creative ideas into campaigns with OpenAI",
+        "published_at": "2026-10-08T12:00:00+00:00",
+        "source": "openai",
+        "source_name": "OpenAI News",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://openai.com/index/disrupting-ai-enabled-false-front-operations",
+        "title": "Disrupting AI-enabled “false front” operations",
+        "published_at": "2026-10-08T00:00:00+00:00",
+        "source": "openai",
+        "source_name": "OpenAI News",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://openai.com/index/teens-learn-and-plan",
+        "title": "Helping teens learn, plan, and shape the future of AI",
+        "published_at": "2026-10-07T12:00:00+00:00",
+        "source": "openai",
+        "source_name": "OpenAI News",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/podcast/what-ai-gets-wrong-and-what-failure-teaches-us/",
+        "title": "What AI gets wrong and what failure teaches us",
+        "published_at": "2026-10-06T16:19:06+00:00",
+        "source": "microsoft_research",
+        "source_name": "Microsoft Research",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://openai.com/index/jump-trading",
+        "title": "How Jump Trading is scaling quant research with ChatGPT",
+        "published_at": "2026-10-06T12:00:00+00:00",
+        "source": "openai",
+        "source_name": "OpenAI News",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://openai.com/index/sharing-ai-progress-in-mathematics",
+        "title": "Sharing AI progress in mathematics",
+        "published_at": "2026-10-06T12:00:00+00:00",
+        "source": "openai",
+        "source_name": "OpenAI News",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      },
+      {
+        "url": "https://openai.com/index/advancing-computer-use-with-ironclad",
+        "title": "Advancing computer use with Ironclad",
+        "published_at": "2026-10-06T10:00:00+00:00",
+        "source": "openai",
+        "source_name": "OpenAI News",
+        "score": 1,
+        "matched_objects": [],
+        "custom": false
+      }
+    ],
+    "source_errors": [
+      {
+        "source": "huggingface",
+        "error": "News host unavailable (ConnectTimeoutError)"
+      },
+      {
+        "source": "google_ai",
+        "error": "News request total timeout"
+      },
+      {
+        "source": "anthropic",
+        "error": "News source returned HTTP 404"
+      },
+      {
+        "source": "meta_ai",
+        "error": "News host unavailable (ConnectTimeoutError)"
+      },
+      {
+        "source": "arxiv",
+        "error": "Invalid RSS/Atom XML or no parseable entries"
+      }
+    ],
+    "retrieved_at": "2026-10-11T08:24:25.373763+00:00",
+    "unmatched_objects": [],
+    "note": "Keyword/alias matches are retrieval candidates, not verified article facts. Fetch original text before summarizing."
+  },
+  "articles": [
+    {
+      "url": "https://techcrunch.com/2026/10/08/google-brings-agentic-ai-to-gemini-starting-with-businesses/",
+      "title": "Google brings agentic AI to Gemini, starting with businesses",
+      "source": "techcrunch",
+      "published_at": "2026-10-08T18:18:00+00:00",
+      "fetched_at": "2026-10-11T08:24:30.273317+00:00",
+      "sha256": "c935b883e55b46c1526b3aa8828f909a7d3dbee975690ec54105a5502d536ca3",
+      "injection_suspected": false
+    },
+    {
+      "url": "https://www.microsoft.com/en-us/research/blog/agent-lightning-v1-0-a-3500-line-lightweight-agentic-rl-framework-for-training-agents-with-real-harnesses/",
+      "title": "Agent Lightning v1.0: A 3,500-Line Lightweight Agentic RL Framework for Training Agents with Real Harnesses",
+      "source": "microsoft_research",
+      "published_at": "2026-10-07T16:00:00+00:00",
+      "fetched_at": "2026-10-11T08:24:39.344836+00:00",
+      "sha256": "8eac2010b3c4677e0e1afc1839e14383bfebf9e77b4ddd4b3245a3af464f196f",
+      "injection_suspected": false
+    },
+    {
+      "url": "https://techcrunch.com/2026/10/10/microsofts-satya-nadella-says-ai-models-need-an-emergency-brake/",
+      "title": "Microsoft’s Satya Nadella says AI models need an ‘emergency brake’",
+      "source": "techcrunch",
+      "published_at": "2026-10-10T21:47:51+00:00",
+      "fetched_at": "2026-10-11T08:24:41.627529+00:00",
+      "sha256": "d22e6c74307d84e19184f48afc653895cbdfe5793ef7f2bbd98b254f362494fa",
+      "injection_suspected": false
+    },
+    {
+      "url": "https://techcrunch.com/2026/10/10/apple-discloses-deal-to-hire-team-and-license-tech-from-personalized-podcast-startup-huxe/",
+      "title": "Apple discloses deal to hire team and license tech from personalized podcast startup Huxe",
+      "source": "techcrunch",
+      "published_at": "2026-10-10T19:50:00+00:00",
+      "fetched_at": "2026-10-11T08:24:45.729881+00:00",
+      "sha256": "987bac15e4c8758980d5ea3fa34177660d414c457c71c0ba8e0384d3495e0e41",
+      "injection_suspected": false
+    },
+    {
+      "url": "https://techcrunch.com/2026/10/10/all-the-ai-agents-that-can-live-in-your-text-messages/",
+      "title": "Here are the top AI agents that can live in your text messages",
+      "source": "techcrunch",
+      "published_at": "2026-10-10T14:00:00+00:00",
+      "fetched_at": "2026-10-11T08:24:50.020188+00:00",
+      "sha256": "e7f7404437cb79e8ee61e53003a44032d84c91ee6a67c881a60ae171f4b889c4",
+      "injection_suspected": false
+    }
+  ]
+}

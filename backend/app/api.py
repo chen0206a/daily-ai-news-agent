@@ -8,9 +8,10 @@ from fastapi import FastAPI, Request, Response, HTTPException, Depends, Query
 from fastapi.middleware.cors import CORSMiddleware
 from .config import get_settings
 from .db import Database, utcnow
-from .schemas import Credentials, Preferences
+from .schemas import Credentials, Preferences, AddSource, SourceEnabled
+from .services.subscriptions import Subscriptions
 from .security import password_hasher, verify_password, create_session, session_user, auth_limit
-from .services.news import NewsService, SOURCES
+from .services.news import NewsService
 from .services.delivery import DeliveryService
 from .services.worker import Worker, InstanceLock, enqueue_run
 
@@ -20,6 +21,7 @@ def create_app(settings=None):
     db = Database(settings.db_path)
     delivery = DeliveryService(db, settings)
     worker = Worker(db, settings, NewsService(), delivery)
+    subscriptions = Subscriptions(db, worker.news)
 
     @asynccontextmanager
     async def lifespan(app):
@@ -40,9 +42,9 @@ def create_app(settings=None):
             lock.close()
 
     app = FastAPI(title="Daily AI News Agent", version="1.0.0", lifespan=lifespan)
-    app.state.db, app.state.worker = db, worker
+    app.state.db, app.state.worker, app.state.subscriptions = db, worker, subscriptions
     app.add_middleware(CORSMiddleware, allow_origins=[settings.frontend_origin], allow_credentials=True,
-                       allow_methods=["GET", "POST", "PUT"], allow_headers=["Content-Type", "X-Requested-With", "Idempotency-Key"])
+                       allow_methods=["GET", "POST", "PUT", "DELETE"], allow_headers=["Content-Type", "X-Requested-With", "Idempotency-Key"])
 
     @app.middleware("http")
     async def security_headers(request: Request, call_next):
@@ -82,8 +84,32 @@ def create_app(settings=None):
                 "smtp_configured": bool(settings.smtp_host and settings.smtp_from), "model": settings.deepseek_model}
 
     @app.get("/api/sources")
-    def sources():
-        return [{"id": key, "name": value["name"], "feed": value["feed"]} for key, value in SOURCES.items()]
+    def sources(current=Depends(user)):
+        return subscriptions.list(current["id"])
+
+    @app.post("/api/sources", status_code=201)
+    def add_source(body: AddSource, current=Depends(user)):
+        return subscriptions.add(current["id"], body)
+
+    @app.post("/api/sources/{source_id}/check")
+    def check_source(source_id: str, current=Depends(user)):
+        return subscriptions.check(current["id"], source_id)
+
+    @app.put("/api/sources/{source_id}")
+    def enable_source(source_id: str, body: SourceEnabled, current=Depends(user)):
+        return subscriptions.change(current["id"], source_id, enabled=body.enabled)
+
+    @app.delete("/api/sources/{source_id}")
+    def delete_source(source_id: str, current=Depends(user)):
+        return subscriptions.change(current["id"], source_id, delete=True)
+
+    @app.post("/api/search-preview")
+    def search_preview(current=Depends(user)):
+        auth_limit(db, f"preview:{current['id']}", 6)
+        prefs = Preferences.model_validate_json(db.one("SELECT data FROM preferences WHERE user_id=?", (current["id"],))["data"])
+        result = subscriptions.search(current["id"], prefs, budget_seconds=25)
+        return {**result, "candidates": result["candidates"][:5], "budget_seconds": 25,
+                "saved_preferences": prefs.model_dump(), "side_effects": "No run, digest or delivery created"}
 
     @app.post("/api/auth/register", status_code=201)
     def register(body: Credentials, request: Request, response: Response):
@@ -125,7 +151,11 @@ def create_app(settings=None):
 
     @app.put("/api/preferences", response_model=Preferences)
     def update_preferences(body: Preferences, current=Depends(user)):
-        db.execute("UPDATE preferences SET data=?,updated_at=? WHERE user_id=?", (body.model_dump_json(), utcnow(), current["id"]))
+        # Atomic with source enable/delete, so a concurrent update cannot resurrect another user's/deleted feed.
+        with db.connect() as conn:
+            conn.execute("BEGIN IMMEDIATE")
+            subscriptions.validate_selection(current["id"], body.sources)
+            conn.execute("UPDATE preferences SET data=?,updated_at=? WHERE user_id=?", (body.model_dump_json(), utcnow(), current["id"]))
         return body
 
     @app.post("/api/runs", status_code=202)

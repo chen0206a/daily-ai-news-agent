@@ -1,0 +1,57 @@
+{
+  "verified_at": "2026-10-11T08:40:42.776879+00:00",
+  "run_id": "0b6cbaea13ab48a582143e0e9aaf5d87",
+  "checks": {
+    "run_completed": true,
+    "real_response_ids": true,
+    "all_article_checks": true,
+    "notification_unique": true,
+    "in_app_sent": true,
+    "no_email_delivery": true,
+    "focus_in_saved_snapshot": true,
+    "partial_failure_kept_valid_candidates": true
+  },
+  "articles": [
+    {
+      "article_id": "512e1dfce47f9d3c78d8f5243512b03c",
+      "url": "https://openai.com/index/gpt-6-for-everyone/",
+      "checks": {
+        "owned_current_run": true,
+        "exact_quote": true,
+        "sha256_matches_body": true,
+        "citation_matches_fetched_url": true,
+        "quote_word_limit": true
+      }
+    },
+    {
+      "article_id": "8697ed94c6ac038ef47072582ff9e022",
+      "url": "https://openai.com/index/asana-browser-agent/",
+      "checks": {
+        "owned_current_run": true,
+        "exact_quote": true,
+        "sha256_matches_body": true,
+        "citation_matches_fetched_url": true,
+        "quote_word_limit": true
+      }
+    },
+    {
+      "article_id": "90d78b23e4457ff9d3735dbc5cad9fb1",
+      "url": "https://openai.com/index/advancing-computer-use-with-ironclad/",
+      "checks": {
+        "owned_current_run": true,
+        "exact_quote": true,
+        "sha256_matches_body": true,
+        "citation_matches_fetched_url": true,
+        "quote_word_limit": true
+      }
+    }
+  ],
+  "deliveries": [
+    {
+      "channel": "in_app",
+      "status": "sent"
+    }
+  ],
+  "notifications": 1,
+  "note": "Verifies origin/quotes/hashes and side effects, not the semantic truth of model summaries."
+}

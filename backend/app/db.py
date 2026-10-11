@@ -59,7 +59,15 @@ CREATE TABLE IF NOT EXISTS auth_attempts (
  bucket TEXT NOT NULL, at REAL NOT NULL
 );
 CREATE INDEX IF NOT EXISTS auth_attempts_bucket ON auth_attempts(bucket,at);
-PRAGMA user_version=1;
+CREATE TABLE IF NOT EXISTS news_sources (
+ id TEXT PRIMARY KEY, user_id TEXT NOT NULL REFERENCES users(id), name TEXT NOT NULL,
+ feed TEXT NOT NULL, enabled INTEGER NOT NULL DEFAULT 0,
+ checked_at TEXT, ok INTEGER, error TEXT, UNIQUE(user_id,feed)
+);
+CREATE TABLE IF NOT EXISTS preset_checks (
+ id TEXT PRIMARY KEY, checked_at TEXT NOT NULL, ok INTEGER NOT NULL, error TEXT
+);
+PRAGMA user_version=2;
 """
 
 

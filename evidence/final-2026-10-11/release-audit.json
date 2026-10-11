@@ -1,0 +1,33 @@
+{
+  "executed_at": "2026-10-11T08:42:55.133256+00:00",
+  "scope": "Current public candidates plus every reachable blob in local/fetched Git history; exact local private credential comparison; common token/hash/cookie patterns",
+  "candidate_files": 114,
+  "historical_blobs": 78,
+  "private_credential_files_compared": 12,
+  "sensitive_content_findings": [],
+  "forbidden_paths": [],
+  "broken_relative_links": [],
+  "ignored_private_paths": {
+    ".env": true,
+    "evidence/private/demo-login.json": true,
+    "data/news.sqlite3": true,
+    "frontend/node_modules": true,
+    "frontend/.next": true,
+    "dist/daily-ai-news-agent-submission.zip": true
+  },
+  "fixtures": "Test-only passwords and example.com emails are labelled test fixtures; real demo passwords are private random values and compared exactly",
+  "screenshots": "Final live screenshots hide account labels and delivery hints; historical anonymous demo screenshots reviewed separately",
+  "remote_ref_at_scan": "7c765563acdb478a9ed6a2ee6680db53a73c72d9",
+  "historical_evidence_hashes": {
+    "evidence/agent-trace.png": "509f89b1c50b678bb9c19d9f935b540ccc0ff4991d2aa61b27bf13a1fe345129",
+    "evidence/backend-tests.xml": "3d8b24b34e29938b0d17b94eb471dcb989cafad760f548ea88da0a92240d8757",
+    "evidence/browser-tests.json": "fffcfcb12961a42ff4df055ee33649137ea546961e6b422a42e1232f579f8c3c",
+    "evidence/dashboard.png": "1501e1b8baed934102e254cd6f5cfc50ee279ad76293cc17279db5906219fe18",
+    "evidence/frontend-audit.json": "6ec8e7f72fe4b65917adc2f3f6962a882c4d7336fe3fcc619b61b563e6a6e4f8",
+    "evidence/live-e2e.json": "aec3e976a99862a973c52415cc8013b19ffdf619109ead03613dd6cb5163b7c4",
+    "evidence/live-news.json": "f86b3defb84ea0639d2bea48773c83281bee6585a9a789d21674d84c1fefee20",
+    "evidence/mobile-empty.png": "b1917a8851aebc0f5b89ac9fcaf743d00c6591f07846671b46865abfb7323841",
+    "evidence/validation.md": "9815ad182fa935f53424dc199801ac856c73499fc939a1ba03c9329807c3439d",
+    "evidence/verified-digest.md": "cb05eaddaf965735b3e8029de4c35c27f57b509319b3fdea3763917c531ebf2f"
+  }
+}

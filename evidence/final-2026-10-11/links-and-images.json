@@ -1,0 +1,152 @@
+{
+  "external_document_links": [
+    {
+      "url": "https://api-docs.deepseek.com/guides/tool_calls/",
+      "status": 200,
+      "final_url": "https://api-docs.deepseek.com/guides/tool_calls/"
+    },
+    {
+      "url": "https://github.com/chen0206a/daily-ai-news-agent",
+      "status": 200,
+      "final_url": "https://github.com/chen0206a/daily-ai-news-agent"
+    },
+    {
+      "url": "https://github.com/chen0206a/daily-ai-news-agent/actions/runs/37882356367",
+      "status": 200,
+      "final_url": "https://github.com/chen0206a/daily-ai-news-agent/actions/runs/37882356367"
+    },
+    {
+      "url": "https://nextjs.org/docs/app/getting-started/installation",
+      "status": 200,
+      "final_url": "https://nextjs.org/docs/app/getting-started/installation"
+    },
+    {
+      "url": "https://reference.langchain.com/python/langgraph.prebuilt/tool_node/tools_condition",
+      "status": 200,
+      "final_url": "https://reference.langchain.com/python/langgraph.prebuilt/tool_node/tools_condition"
+    }
+  ],
+  "png_integrity": [
+    {
+      "path": "evidence/agent-trace.png",
+      "width": 1440,
+      "height": 2507,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/dashboard.png",
+      "width": 1440,
+      "height": 1486,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/mobile-empty.png",
+      "width": 390,
+      "height": 1462,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/agent-trace-final.png",
+      "width": 1440,
+      "height": 2830,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/agent-trace.png",
+      "width": 1440,
+      "height": 2507,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/dashboard-final.png",
+      "width": 1440,
+      "height": 1490,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/dashboard.png",
+      "width": 1440,
+      "height": 1486,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/history-final.png",
+      "width": 1440,
+      "height": 1080,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/mobile-empty.png",
+      "width": 390,
+      "height": 1459,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/preferences-final.png",
+      "width": 1440,
+      "height": 2037,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/subscription-mobile.png",
+      "width": 390,
+      "height": 2265,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/subscription-preview.png",
+      "width": 1440,
+      "height": 1890,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/final-2026-10-11/trace-error-recovery.png",
+      "width": 1440,
+      "height": 1080,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/subscription-enhancement/agent-trace.png",
+      "width": 1440,
+      "height": 2507,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/subscription-enhancement/dashboard.png",
+      "width": 1440,
+      "height": 1486,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/subscription-enhancement/mobile-empty.png",
+      "width": 390,
+      "height": 1459,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/subscription-enhancement/subscription-mobile.png",
+      "width": 390,
+      "height": 2265,
+      "crc_valid": true
+    },
+    {
+      "path": "evidence/subscription-enhancement/subscription-preview.png",
+      "width": 1440,
+      "height": 1890,
+      "crc_valid": true
+    },
+    {
+      "path": "docs/architecture.png",
+      "width": 1552,
+      "height": 1416,
+      "crc_valid": true
+    },
+    {
+      "path": "docs/workflow.png",
+      "width": 1552,
+      "height": 2090,
+      "crc_valid": true
+    }
+  ],
+  "note": "All Markdown relative destinations checked by audit_release.py; HTTP restrictions are reported, not treated as success."
+}

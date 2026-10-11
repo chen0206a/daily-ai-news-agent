@@ -1,0 +1,210 @@
+{
+  "checked_at": "2026-10-09T04:39:30.538943+00:00",
+  "kind": "actual HTTPS RSS requests, no LLM, disposable database",
+  "presets": [
+    {
+      "id": "openai",
+      "name": "OpenAI News",
+      "feed": "https://openai.com/news/rss.xml",
+      "custom": false,
+      "enabled": true,
+      "checked_at": "2026-10-09T04:39:31.901631+00:00",
+      "ok": 1,
+      "error": null,
+      "valid_entries": 80
+    },
+    {
+      "id": "huggingface",
+      "name": "Hugging Face Blog",
+      "feed": "https://huggingface.co/blog/feed.xml",
+      "custom": false,
+      "enabled": true,
+      "checked_at": "2026-10-09T04:39:35.944449+00:00",
+      "ok": 0,
+      "error": "News host unavailable (ConnectTimeoutError)",
+      "valid_entries": 0
+    },
+    {
+      "id": "google_ai",
+      "name": "Google AI",
+      "feed": "https://blog.google/technology/ai/rss/",
+      "custom": false,
+      "enabled": true,
+      "checked_at": "2026-10-09T04:39:48.223140+00:00",
+      "ok": 0,
+      "error": "News host unavailable (ConnectTimeoutError)",
+      "valid_entries": 0
+    },
+    {
+      "id": "techcrunch",
+      "name": "TechCrunch AI",
+      "feed": "https://techcrunch.com/category/artificial-intelligence/feed/",
+      "custom": false,
+      "enabled": true,
+      "checked_at": "2026-10-09T04:39:49.104543+00:00",
+      "ok": 1,
+      "error": null,
+      "valid_entries": 20
+    },
+    {
+      "id": "anthropic",
+      "name": "Anthropic",
+      "feed": "https://www.anthropic.com/news/rss.xml",
+      "custom": false,
+      "enabled": false,
+      "checked_at": "2026-10-09T04:39:50.131228+00:00",
+      "ok": 0,
+      "error": "News source returned HTTP 404",
+      "valid_entries": 0
+    },
+    {
+      "id": "meta_ai",
+      "name": "Meta AI",
+      "feed": "https://ai.meta.com/blog/rss/",
+      "custom": false,
+      "enabled": false,
+      "checked_at": "2026-10-09T04:39:54.335317+00:00",
+      "ok": 0,
+      "error": "News host unavailable (ConnectTimeoutError)",
+      "valid_entries": 0
+    },
+    {
+      "id": "microsoft_research",
+      "name": "Microsoft Research",
+      "feed": "https://www.microsoft.com/en-us/research/feed/",
+      "custom": false,
+      "enabled": true,
+      "checked_at": "2026-10-09T04:40:02.349042+00:00",
+      "ok": 1,
+      "error": null,
+      "valid_entries": 10
+    },
+    {
+      "id": "arxiv",
+      "name": "arXiv cs.AI",
+      "feed": "https://rss.arxiv.org/rss/cs.AI",
+      "custom": false,
+      "enabled": false,
+      "checked_at": "2026-10-09T04:40:17.403355+00:00",
+      "ok": 0,
+      "error": "Source unavailable (ReadTimeoutError; network timeout or connection failure)",
+      "valid_entries": 0
+    }
+  ],
+  "custom": {
+    "name": "Live custom RSS validation",
+    "feed": "https://www.microsoft.com/en-us/research/feed/",
+    "enabled": 0,
+    "checked_at": "2026-10-09T04:40:17.438106+00:00",
+    "ok": 1,
+    "error": null,
+    "custom": true
+  },
+  "preview": {
+    "trust": "untrusted_news_data",
+    "candidates": [
+      {
+        "url": "https://www.microsoft.com/en-us/research/blog/agent-lightning-v1-0-a-3500-line-lightweight-agentic-rl-framework-for-training-agents-with-real-harnesses/",
+        "title": "Agent Lightning v1.0: A 3,500-Line Lightweight Agentic RL Framework for Training Agents with Real Harnesses",
+        "published_at": "2026-10-07T16:00:00+00:00",
+        "snippet": "Training AI agents with reinforcement learning can be challenging because their tools, context, and decision-making are managed by complex frameworks. Agent Lightning connects existing agents to RL training, making it easier to improve them without rebuilding them. The post Agent Lightning v1.0: A 3,500-Line Lightweight Agentic RL Framework for Training Agents with Real Harnesses appeared first on Microsoft Research .",
+        "source": "custom_a579730900924cb6a4ef0b98bea760fd",
+        "source_name": "Live custom RSS validation",
+        "score": 3,
+        "matched_objects": [
+          "LLM"
+        ],
+        "custom": true
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/podcast/what-ai-gets-wrong-and-what-failure-teaches-us/",
+        "title": "What AI gets wrong and what failure teaches us",
+        "published_at": "2026-10-06T16:19:06+00:00",
+        "snippet": "Jennifer Neville did not want to go into computer science—but that’s exactly where she landed. Neville discusses the starts and stops that led to her professional sweet spot and her work identifying “surprising failures” making it hard for AI to handle complexity. The post What AI gets wrong and what failure teaches us appeared first on Microsoft Research .",
+        "source": "custom_a579730900924cb6a4ef0b98bea760fd",
+        "source_name": "Live custom RSS validation",
+        "score": 3,
+        "matched_objects": [
+          "LLM"
+        ],
+        "custom": true
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/blog/introducing-quine-an-ai-research-system-designed-for-the-complexity-of-biology/",
+        "title": "Introducing Quine: An AI research system designed for the complexity of biology",
+        "published_at": "2026-09-29T14:00:02+00:00",
+        "snippet": "Biology doesn't operate in silos, and neither should the AI representation of it. Quine is an early-stage research effort to create a multimodal world model of biology. By connecting insights across biological scales and modalities, Quine helps scientists computationally search a space far larger than intuition allows and prioritize hypotheses before they reach the lab. Experimental results provide important feedback, helping researchers sharpen future research directions. The post Introducing Q",
+        "source": "custom_a579730900924cb6a4ef0b98bea760fd",
+        "source_name": "Live custom RSS validation",
+        "score": 3,
+        "matched_objects": [
+          "LLM"
+        ],
+        "custom": true
+      },
+      {
+        "url": "https://www.microsoft.com/en-us/research/blog/one-year-in-how-microsoft-research-asia-singapore-is-advancing-research-partnership-and-talent-for-real-world-impact/",
+        "title": "One year in: How Microsoft Research Asia – Singapore is advancing research, partnership and talent for real-world impact",
+        "published_at": "2026-09-28T21:00:00+00:00",
+        "snippet": "Since launching a year ago, the Microsoft Research Asia — Singapore lab has established a strong foundation, deepened collaboration across government, academia, and industry, and explored how frontier AI research can create real-world value. The post One year in: How Microsoft Research Asia – Singapore is advancing research, partnership and talent for real-world impact appeared first on Microsoft Research .",
+        "source": "custom_a579730900924cb6a4ef0b98bea760fd",
+        "source_name": "Live custom RSS validation",
+        "score": 3,
+        "matched_objects": [
+          "LLM"
+        ],
+        "custom": true
+      }
+    ],
+    "source_errors": [],
+    "retrieved_at": "2026-10-09T04:40:17.551149+00:00",
+    "unmatched_objects": [],
+    "note": "Keyword/alias matches are retrieval candidates, not verified article facts. Fetch original text before summarizing.",
+    "budget_seconds": 25,
+    "saved_preferences": {
+      "topics": [
+        "language models"
+      ],
+      "sources": [
+        "custom_a579730900924cb6a4ef0b98bea760fd"
+      ],
+      "watch_objects": [
+        {
+          "type": "topic",
+          "name": "LLM",
+          "aliases": [
+            "AI",
+            "artificial intelligence",
+            "large language model",
+            "language models"
+          ]
+        }
+      ],
+      "language": "zh",
+      "max_articles": 5,
+      "lookback_days": 14,
+      "timezone": "Asia/Shanghai",
+      "delivery_time": "08:00",
+      "schedule_enabled": false,
+      "in_app_enabled": true,
+      "email_enabled": false
+    },
+    "side_effects": "No run, digest or delivery created"
+  },
+  "side_effect_counts": {
+    "runs": 0,
+    "articles": 0,
+    "digests": 0,
+    "deliveries": 0,
+    "notifications": 0
+  },
+  "invalid_feed": {
+    "name": "Live invalid HTML feed",
+    "feed": "https://openai.com/",
+    "enabled": 0,
+    "checked_at": "2026-10-09T04:40:18.345740+00:00",
+    "ok": 0,
+    "error": "Invalid RSS/Atom XML or no parseable entries",
+    "custom": true
+  }
+}

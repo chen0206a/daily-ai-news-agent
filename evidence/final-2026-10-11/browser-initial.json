@@ -1,0 +1,349 @@
+{
+  "config": {
+    "argv": [
+      "<NODE_EXECUTABLE>",
+      "<PROJECT_ROOT>\\frontend\\node_modules\\@playwright\\test\\cli.js",
+      "test"
+    ],
+    "configFile": "<PROJECT_ROOT>\\frontend\\playwright.config.ts",
+    "rootDir": "<PROJECT_ROOT>/frontend/tests",
+    "failOnFlakyTests": false,
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "<PROJECT_ROOT>/frontend/test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "<PROJECT_ROOT>/frontend/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "filteredProjects": [
+      {
+        "grep": {},
+        "grepInvert": null,
+        "outputDir": "<PROJECT_ROOT>\\frontend\\test-results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "name": "",
+        "testDir": "<PROJECT_ROOT>\\frontend\\tests",
+        "snapshotDir": "<PROJECT_ROOT>\\frontend\\tests",
+        "testIgnore": [],
+        "testMatch": "**/*.@(spec|test).?(c|m)[jt]s?(x)",
+        "timeout": 45000,
+        "use": {
+          "baseURL": "http://localhost:3000",
+          "browserName": "chromium",
+          "viewport": {
+            "width": 1440,
+            "height": 1050
+          },
+          "screenshot": "only-on-failure",
+          "trace": "retain-on-failure"
+        },
+        "dependencies": [],
+        "ignoreSnapshots": false,
+        "__projectId": ""
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "../evidence/final-2026-10-11/browser-tests.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "default",
+    "updateSourceMethod": "patch",
+    "version": "1.64.0",
+    "workers": 1,
+    "webServer": null
+  },
+  "suites": [
+    {
+      "title": "app.spec.ts",
+      "file": "app.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "registration, persisted preferences, archive, trace and mobile layout",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1250,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T08:27:05.707Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c31ff144dc4fee3acd0a-b88c275632c173e84e1e",
+          "file": "app.spec.ts",
+          "line": 6,
+          "column": 5
+        },
+        {
+          "title": "display actual DeepSeek digest and actual tool trace when live evidence exists",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1165,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T08:27:07.280Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "c31ff144dc4fee3acd0a-f837cc411c9701881db7",
+          "file": "app.spec.ts",
+          "line": 30,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "final-live.spec.ts",
+      "file": "final-live.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "FINAL LIVE: login, subscriptions, RSS, focus, preview, DeepSeek, citations, history and Trace",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 420000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 41679,
+                  "errors": [],
+                  "stdout": [
+                    {
+                      "text": "Real DeepSeek run started: 0b6cbaea13ab48a582143e0e9aaf5d87\n"
+                    },
+                    {
+                      "text": "Real outcome: completed; 10 model calls; 13 tool calls; 3 articles; 1 notifications\n"
+                    }
+                  ],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T08:27:08.470Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "de53312620ca8aa81c70-9c20c1500d713ce67002",
+          "file": "final-live.spec.ts",
+          "line": 12,
+          "column": 5
+        }
+      ]
+    },
+    {
+      "title": "subscriptions.spec.ts",
+      "file": "subscriptions.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "focus object add edit delete and saved preference reload",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 2068,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"aliases\": Array [\u001b[39m\n\u001b[31m+       \"lang graph\",\u001b[39m\n\u001b[31m+       \"LangGraph framework\",\u001b[39m\n\u001b[31m+       \"langgraph.js\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"name\": \"LangGraph\",\u001b[39m\n\u001b[31m+     \"type\": \"project\",\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"aliases\": Array [\u001b[39m\n\u001b[31m+       \"lang graph\",\u001b[39m\n\u001b[31m+       \"LangGraph framework\",\u001b[39m\n\u001b[31m+       \"langgraph.js\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"name\": \"LangGraph\",\u001b[39m\n\u001b[31m+     \"type\": \"project\",\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n    at <PROJECT_ROOT>\\frontend\\tests\\subscriptions.spec.ts:37:46",
+                    "location": {
+                      "file": "<PROJECT_ROOT>\\frontend\\tests\\subscriptions.spec.ts",
+                      "column": 46,
+                      "line": 37
+                    },
+                    "snippet": "  35 |   await page.getByRole(\"button\", {name: \"保存订阅配置\"}).click();\n  36 |   const prefs = await page.request.get(\"/api/preferences\");\n> 37 |   expect((await prefs.json()).watch_objects).toEqual([]);\n     |                                              ^\n  38 | });\n  39 |\n  40 | test(\"RSS validation, lifecycle and live saved-config preview without digest side effects\", async ({page}) => {"
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "<PROJECT_ROOT>\\frontend\\tests\\subscriptions.spec.ts",
+                        "column": 46,
+                        "line": 37
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoEqual\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // deep equality\u001b[22m\n\n\u001b[32m- Expected  -  1\u001b[39m\n\u001b[31m+ Received  + 11\u001b[39m\n\n\u001b[32m- Array []\u001b[39m\n\u001b[31m+ Array [\u001b[39m\n\u001b[31m+   Object {\u001b[39m\n\u001b[31m+     \"aliases\": Array [\u001b[39m\n\u001b[31m+       \"lang graph\",\u001b[39m\n\u001b[31m+       \"LangGraph framework\",\u001b[39m\n\u001b[31m+       \"langgraph.js\",\u001b[39m\n\u001b[31m+     ],\u001b[39m\n\u001b[31m+     \"name\": \"LangGraph\",\u001b[39m\n\u001b[31m+     \"type\": \"project\",\u001b[39m\n\u001b[31m+   },\u001b[39m\n\u001b[31m+ ]\u001b[39m\n\n  35 |   await page.getByRole(\"button\", {name: \"保存订阅配置\"}).click();\n  36 |   const prefs = await page.request.get(\"/api/preferences\");\n> 37 |   expect((await prefs.json()).watch_objects).toEqual([]);\n     |                                              ^\n  38 | });\n  39 |\n  40 | test(\"RSS validation, lifecycle and live saved-config preview without digest side effects\", async ({page}) => {\n    at <PROJECT_ROOT>\\frontend\\tests\\subscriptions.spec.ts:37:46"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T08:27:50.181Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "<PROJECT_ROOT>\\frontend\\test-results\\subscriptions-focus-object-cec3b-and-saved-preference-reload\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "<PROJECT_ROOT>\\frontend\\test-results\\subscriptions-focus-object-cec3b-and-saved-preference-reload\\error-context.md"
+                    },
+                    {
+                      "name": "trace",
+                      "contentType": "application/zip",
+                      "path": "<PROJECT_ROOT>\\frontend\\test-results\\subscriptions-focus-object-cec3b-and-saved-preference-reload\\trace.zip"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "<PROJECT_ROOT>\\frontend\\tests\\subscriptions.spec.ts",
+                    "column": 46,
+                    "line": 37
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "3dff583044165241f1bb-6f0c73d2a4e623bdaed4",
+          "file": "subscriptions.spec.ts",
+          "line": 15,
+          "column": 5
+        },
+        {
+          "title": "RSS validation, lifecycle and live saved-config preview without digest side effects",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 90000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2826,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-10-11T08:27:53.770Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "3dff583044165241f1bb-86235fb7357b646d924e",
+          "file": "subscriptions.spec.ts",
+          "line": 40,
+          "column": 5
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-10-11T08:27:04.894Z",
+    "duration": 52486.542,
+    "expected": 4,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

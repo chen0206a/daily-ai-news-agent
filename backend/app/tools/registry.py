@@ -9,7 +9,8 @@ from pydantic import Field
 from ..db import dumps, utcnow
 from ..schemas import StrictModel, Preferences, SaveDigestArgs
 from ..security import Workspace, SecurityError
-from ..services.news import canonical_url
+from ..services.news import normalize_public_url, NewsService
+from ..services.subscriptions import Subscriptions
 from . import filesystem
 
 
@@ -107,13 +108,21 @@ class ToolRegistry:
         if name == "get_preferences":
             return {**ctx.preferences.model_dump(), "digest_date": self._date()}
         if name == "search_news":
-            result = ctx.news.search(args["query"], ctx.preferences.sources, ctx.preferences.lookback_days)
-            ctx.discovered.update({canonical_url(c["url"]): c for c in result["candidates"]})
+            if isinstance(ctx.news, NewsService):
+                result = Subscriptions(ctx.db, ctx.news).search(ctx.user_id, ctx.preferences, args["query"])
+            else:
+                result = ctx.news.search(args["query"], ctx.preferences.sources, ctx.preferences.lookback_days)
+            ctx.discovered.update({normalize_public_url(c["url"]): c for c in result["candidates"]})
             return result
         if name == "fetch_article":
-            url = canonical_url(args["url"])
+            url = normalize_public_url(args["url"])
             if url not in ctx.discovered:
                 raise SecurityError("URL was not discovered by this user's current run")
+            candidate = ctx.discovered[url]
+            if candidate.get("custom"):
+                permitted = ctx.db.one("SELECT id FROM news_sources WHERE id=? AND user_id=? AND enabled=1", (candidate["source"], ctx.user_id))
+                if not permitted or candidate["source"] not in ctx.preferences.sources:
+                    raise SecurityError("Custom source permission revoked")
             existing = ctx.db.one("SELECT * FROM articles WHERE run_id=? AND url=? AND user_id=?", (ctx.run_id, url, ctx.user_id))
             if existing:
                 return {**existing, "article_id": existing["id"], "trust": "untrusted_news_data"}

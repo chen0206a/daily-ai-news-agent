@@ -1,13 +1,16 @@
 """Real DeepSeek + real news + SQLite + in-app delivery through the application API.
 
 This is opt-in, consumes API credit, never sends email, and uses no scripted model.
-Credentials remain in ignored evidence/private/demo-login.json.
+Credentials remain in ignored evidence/private/<run-directory>/demo-login.json.
 """
 import json
+import argparse
 import secrets
 import time
 import uuid
 from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
 from app.agent.graph import redact
 from app.api import create_app
@@ -18,6 +21,14 @@ import httpx
 
 
 def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--output-dir", type=Path)
+    args = parser.parse_args()
+    root = Path(__file__).resolve().parents[1]
+    output = args.output_dir or root / "evidence" / datetime.now(ZoneInfo("Asia/Shanghai")).strftime("live-%Y%m%d-%H%M%S")
+    output = output.resolve()
+    if (output / "live-e2e.json").exists():
+        raise SystemExit("Choose a new --output-dir; refusing to overwrite real model evidence")
     settings = Settings(worker_enabled=True, scheduler_enabled=False)
     if not settings.deepseek_api_key:
         print("BLOCKED: DEEPSEEK_API_KEY is not configured. No model result was fabricated.")
@@ -33,8 +44,11 @@ def main():
     headers = {"X-Requested-With": "daily-ai-news", "Origin": settings.frontend_origin}
     email = f"demo-{uuid.uuid4().hex[:8]}@example.com"
     password = secrets.token_urlsafe(24)
-    private = Path("evidence/private")
+    private = root / "evidence/private" / output.name
+    if (private / "demo-login.json").exists():
+        raise SystemExit("Choose a unique output-directory name; refusing to overwrite private demo login")
     private.mkdir(parents=True, exist_ok=True)
+    output.mkdir(parents=True, exist_ok=True)
     (private / "demo-login.json").write_text(json.dumps({"email": email, "password": password}, indent=2), encoding="utf-8")
     with client_context as client:
         response = client.post("/api/auth/register", json={"email": email, "password": password}, headers=headers)
@@ -75,9 +89,9 @@ def main():
                   "model": settings.deepseek_model, "trace": public_trace,
                   "digest": {k: digest[k] for k in ("id", "title", "digest_date", "items", "deliveries")} if digest else None,
                   "in_app_notifications": len(notifications), "email": "NOT_SENT; disabled for this demo"}
-        Path("evidence/live-e2e.json").write_text(json.dumps(redact(report, settings.deepseek_api_key), ensure_ascii=False, indent=2), encoding="utf-8")
+        (output / "live-e2e.json").write_text(json.dumps(redact(report, settings.deepseek_api_key), ensure_ascii=False, indent=2), encoding="utf-8")
         if digest:
-            Path("evidence/verified-digest.md").write_text(digest["markdown"].rstrip() + "\n", encoding="utf-8")
+            (output / "verified-digest.md").write_text(digest["markdown"].rstrip() + "\n", encoding="utf-8")
         print(f"Live run status: {run['status']}; digest={bool(digest)}; notifications={len(notifications)}; error={run['error']}")
         return 0 if run["status"] == "completed" and digest and notifications else 1
 

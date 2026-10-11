@@ -1,0 +1,42 @@
+// Capture real finalized UI with private local login; never print credentials or alter product data.
+import {createRequire} from "node:module";
+import fs from "node:fs/promises";
+import path from "node:path";
+const require = createRequire(path.resolve("package.json"));
+const {chromium, expect} = require("@playwright/test");
+const folder = process.env.EVIDENCE_DIR || "../evidence/final-2026-10-11";
+const privateFolder = process.env.LIVE_PRIVATE_DIR || "../evidence/private/final-2026-10-11";
+const login = JSON.parse(await fs.readFile(path.resolve(privateFolder, "demo-login.json"), "utf8"));
+const browser = await chromium.launch({headless: true});
+const style = ".profile small{visibility:hidden}.toggle-row small{visibility:hidden}";
+try {
+  const page = await browser.newPage({viewport: {width: 1440, height: 1080}});
+  await page.goto("http://localhost:3000/");
+  await page.getByLabel("邮箱地址").fill(login.email);
+  await page.getByLabel("密码", {exact: true}).fill(login.password);
+  await page.getByRole("button", {name: "进入工作台", exact: true}).click();
+  await expect(page.locator(".news-item")).toHaveCount(3);
+  await expect(page.locator(".metric-value").last()).toHaveText("已完成");
+  await expect(page.locator(".delivery-row .badge")).toHaveText("已送达");
+  await page.locator(".evidence summary").first().click();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({path: `${folder}/dashboard-final.png`, fullPage: true, style});
+  await page.getByRole("button", {name: "查看生成轨迹", exact: true}).click();
+  await expect(page.locator(".trace-event")).not.toHaveCount(0);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({path: `${folder}/agent-trace-final.png`, fullPage: true, style});
+  const rejected = page.locator(".trace-event").filter({has: page.getByText("save_digest", {exact: true})}).first();
+  await rejected.locator("summary").click();
+  await rejected.scrollIntoViewIfNeeded();
+  await page.screenshot({path: `${folder}/trace-error-recovery.png`, style});
+  await page.getByRole("button", {name: "历史日报", exact: true}).click();
+  await expect(page.locator(".archive-row")).toHaveCount(1);
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({path: `${folder}/history-final.png`, fullPage: true, style});
+  await page.getByRole("button", {name: "订阅配置", exact: true}).click();
+  await page.getByText("更多新闻源与自定义 RSS", {exact: false}).click();
+  await page.getByText("重点关注对象", {exact: false}).click();
+  await page.evaluate(() => window.scrollTo(0, 0));
+  await page.screenshot({path: `${folder}/preferences-final.png`, fullPage: true, style});
+  console.log("Captured actual finalized digest, Trace/error, archive and preferences; account labels hidden.");
+} finally {await browser.close();}

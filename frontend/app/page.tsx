@@ -3,6 +3,8 @@
 import {useCallback, useEffect, useState, type FormEvent, type ReactNode} from "react";
 import {ArrowDownToLine, ArrowRight, Bell, BookOpen, Check, CheckCircle2, ChevronRight, Clock3, Code2, ExternalLink, FileText, Globe2, History, Loader2, LogOut, Mail, Play, Radio, RefreshCw, Settings2, ShieldCheck, Sparkles, Sun, Terminal, Workflow, X} from "lucide-react";
 import {api, type User, type Health, type Prefs, type Run, type Digest, type Trace, type Notice} from "./types";
+import {type NewsSource, type SearchPreview} from "./types";
+import {SubscriptionExtras, SearchResults} from "./SubscriptionExtras";
 
 const sourceNames: Record<string, string> = {openai: "OpenAI", huggingface: "Hugging Face", google_ai: "Google AI", techcrunch: "TechCrunch"};
 const statusNames: Record<string, string> = {queued: "排队中", running: "执行中", completed: "已完成", incomplete: "未完成", failed: "失败", interrupted: "已中断", pending: "待推送", sent: "已送达", sending: "发送中", uncertain: "待核查", cancelled: "已取消"};
@@ -41,6 +43,11 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const [archivePage, setArchivePage] = useState(0);
   const [archive, setArchive] = useState<Digest[]>([]);
+  const [sources, setSources] = useState<NewsSource[]>([]);
+  const [preview, setPreview] = useState<SearchPreview | null>(null);
+  const [searching, setSearching] = useState(false);
+  const reloadSources = useCallback(async () => {setSources(await api<NewsSource[]>("/sources"));}, []);
+  const displaySources = {...sourceNames, ...Object.fromEntries(sources.map(s => [s.id, s.name]))};
 
   const refresh = useCallback(async () => {
     const [r, d, n] = await Promise.all([api<Run[]>("/runs"), api<Digest[]>("/digests"), api<Notice[]>("/notifications")]);
@@ -52,11 +59,12 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (!user) return;
+    reloadSources().catch(e => setError(e.message));
     api<Prefs>("/preferences").then(p => {setPrefs(p); setTopics(p.topics.join(", "));}).catch(e => setError(e.message));
     refresh().catch(e => setError(e.message));
     const timer = setInterval(() => refresh().catch(() => {}), 4000);
     return () => clearInterval(timer);
-  }, [user, refresh]);
+  }, [user, refresh, reloadSources]);
   useEffect(() => {
     if (user && !digest && digests.length) api<Digest>(`/digests/${digests[0].id}`).then(setDigest).catch(e => setError(e.message));
   }, [user, digest, digests]);
@@ -101,11 +109,17 @@ export default function Home() {
     try {const updated = await api<Prefs>("/preferences", {method: "PUT", body: JSON.stringify({...prefs, topics: topics.split(/[,，]/).map(v => v.trim()).filter(Boolean)})}); setPrefs(updated); setMessage("订阅配置已保存，下一次任务将使用新配置。");}
     catch (e) {setError((e as Error).message);} finally {setBusy(false);}
   }
+  async function testSearch() {
+    setSearching(true); setPreview(null); setError("");
+    try {setPreview(await api<SearchPreview>("/search-preview", {method: "POST"}));}
+    catch(e) {setError((e as Error).message);} finally {setSearching(false); await reloadSources().catch(() => {});}
+  }
   async function openDigest(id: string) {
     try {setDigest(await api<Digest>(`/digests/${id}`)); setTab("today"); setShowNotices(false);}
     catch (e) {setError((e as Error).message);}
   }
   async function logout() {
+    setPreview(null); setSources([]);
     try {await api("/auth/logout", {method: "POST"}); setUser(null); setPrefs(null); setDigest(null); setDigests([]); setRuns([]); setTraceRun(null); setTrace([]); setNotices([]); setTab("today");}
     catch (e) {setError((e as Error).message);}
   }
@@ -156,24 +170,26 @@ export default function Home() {
       {error && <div role="alert" className="error-box banner">{error}<button aria-label="关闭错误提示" onClick={() => setError("")}><X size={16}/></button></div>}
       {message && <div role="status" className="success-box"><CheckCircle2 size={17}/>{message}</div>}
       <div className="page-heading"><div><span className="eyebrow">{tab === "today" ? "A LITTLE LESS NOISE. A LOT MORE SIGNAL." : nav.find(n => n.id === tab)?.small.toUpperCase()}</span><h1>{tab === "today" ? "今天的 AI，值得你知道。" : tab === "preferences" ? "让信息，与你有关。" : tab === "history" ? "每一天，都有迹可循。" : "看见 Agent 的每一步。"}</h1><p>{tab === "today" ? "你的专属 AI 新闻简报。从真实来源出发，让每一条洞察都有依据。" : tab === "preferences" ? "选择关注的主题与信源，安排每天的阅读时刻。" : tab === "history" ? "回看已生成的日报、原始来源和推送记录。" : "模型自主决定工具顺序；这里展示真实调用与结果，不展示私密思维链。"}</p></div>
-        <button className="button primary" disabled={busy || !!activeRun || !health?.model_configured} onClick={generate}>{activeRun ? <Loader2 size={17} className="spin"/> : <Sparkles size={17}/>} {activeRun ? "Agent 工作中" : "生成今日日报"}</button>
+        <div className="heading-actions"><button className="button secondary" disabled={searching || busy} onClick={testSearch}>{searching ? <Loader2 size={17} className="spin"/> : <Globe2 size={17}/>} {searching ? "检索中…" : "测试检索"}</button><button className="button primary" disabled={busy || !!activeRun || !health?.model_configured} onClick={generate}>{activeRun ? <Loader2 size={17} className="spin"/> : <Sparkles size={17}/>} {activeRun ? "Agent 工作中" : "生成今日日报"}</button></div>
       </div>
+
+      {preview && <SearchResults result={preview} sources={sources}/>}
 
       {tab === "today" && <>
         <div className="metric-grid"><Metric icon={<BookOpen/>} label="已生成日报" value={String(digests.length)} suffix={digests.length === 30 ? "篇 · 最近 30 篇" : "篇"}/><Metric icon={<Globe2/>} label="订阅新闻源" value={String(prefs?.sources.length || 0)} suffix="个可信入口"/><Metric icon={<Clock3/>} label="每日送达时间" value={prefs?.delivery_time || "—"} suffix={prefs?.schedule_enabled ? prefs.timezone : "自动订阅未开启"}/><Metric icon={<Workflow/>} label="最近任务" value={runs.length ? statusNames[runs[0].status] || runs[0].status : "待开始"} suffix={runs[0]?.model || "让 Agent 为你工作"}/></div>
         <div className="dashboard-grid"><section className="digest-section"><div className="section-heading"><h2><FileText size={19}/> {digest ? "你的 AI 简报" : "今日简报"}</h2><span className="mini-label">DAILY BRIEFING</span></div>
           {digest ? <article className="digest-paper"><div className="paper-meta"><span className="edition">EDITION / {digest.digest_date.replaceAll("-", ".")}</span><button className="text-button" onClick={download}><ArrowDownToLine size={14}/> 导出 Markdown</button></div><h2>{digest.title}</h2><div className="paper-byline"><span><Sparkles size={13}/> DeepSeek 整理</span><span>·</span><span>{digest.items?.length} 条来源可核查的新闻</span></div>
-            {digest.items?.map((item, i) => <section className="news-item" key={item.article_id}><div className="news-number">{String(i + 1).padStart(2, "0")}</div><div className="news-content"><div className="news-source"><span>{sourceNames[item.source] || item.source}</span><time>{stamp(item.published_at)}</time></div><h3><a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}<ExternalLink size={14}/></a></h3><p>{item.summary}</p><details className="evidence"><summary><ShieldCheck size={13}/> 查看原文证据与来源指纹 <ChevronRight size={13}/></summary><blockquote>{item.evidence_quote}</blockquote><small>抓取于 {stamp(item.fetched_at)}</small><code>SHA-256 / {item.sha256}</code><a href={item.url} target="_blank" rel="noopener noreferrer">阅读完整原文 <ExternalLink size={12}/></a></details></div></section>)}
+            {digest.items?.map((item, i) => <section className="news-item" key={item.article_id}><div className="news-number">{String(i + 1).padStart(2, "0")}</div><div className="news-content"><div className="news-source"><span>{displaySources[item.source] || item.source}</span><time>{stamp(item.published_at)}</time></div><h3><a href={item.url} target="_blank" rel="noopener noreferrer">{item.title}<ExternalLink size={14}/></a></h3><p>{item.summary}</p><details className="evidence"><summary><ShieldCheck size={13}/> 查看原文证据与来源指纹 <ChevronRight size={13}/></summary><blockquote>{item.evidence_quote}</blockquote><small>抓取于 {stamp(item.fetched_at)}</small><code>SHA-256 / {item.sha256}</code><a href={item.url} target="_blank" rel="noopener noreferrer">阅读完整原文 <ExternalLink size={12}/></a></details></div></section>)}
             <div className="paper-footer"><span><ShieldCheck size={15}/> 引用来自本次真实抓取；AI 摘要仍需结合原文判断。</span><button className="text-button" onClick={() => {setTraceRun(runs.find(r => r.id === digest.run_id) || {id: digest.run_id, status: "completed", trigger: "manual", created_at: digest.created_at, model: health?.model || ""}); setTab("trace");}}>查看生成轨迹 <ArrowRight size={13}/></button></div>
           </article> : <div className="card"><Empty icon={<Sun size={36}/>} title="一份更清晰的 AI 视野，从这里开始" text="配置感兴趣的主题，点击生成。Agent 将自主查找、阅读并核验新闻来源。"><button className="button secondary" onClick={() => setTab("preferences")}>设置我的订阅 <ArrowRight size={15}/></button></Empty></div>}
         </section><aside className="right-column"><div className="card schedule-card"><div className="section-heading"><h3>阅读节奏</h3><Clock3 size={17}/></div><div className="schedule-time">{prefs?.delivery_time || "08:00"}<span>{prefs?.timezone}</span></div><div className="schedule-state"><span className={`live-dot ${prefs?.schedule_enabled ? "" : "muted"}`}/>{prefs?.schedule_enabled ? "每日自动生成" : "当前使用手动生成"}</div><div className="divider"/><div className="channel"><Bell size={15}/> 站内推送 <span>{prefs?.in_app_enabled ? "已开启" : "已关闭"}</span></div><div className="channel"><Mail size={15}/> 邮件推送 <span>{prefs?.email_enabled ? health?.smtp_configured ? "已开启" : "待配置 SMTP" : "已关闭"}</span></div><button className="button secondary wide" onClick={() => setTab("preferences")}>管理订阅 <Settings2 size={14}/></button></div>
-          <div className="card sources-card"><div className="section-heading"><h3>你的新闻源</h3><Globe2 size={17}/></div>{prefs?.sources.map((s, i) => <div className="source-row" key={s}><span className={`source-logo logo-${i}`}>{sourceNames[s]?.[0]}</span><span>{sourceNames[s]}</span><Check size={14}/></div>)}<p className="micro-copy">直连公开 RSS 与原文。不可用的来源会在 Trace 中如实记录。</p></div>
+          <div className="card sources-card"><div className="section-heading"><h3>你的新闻源</h3><Globe2 size={17}/></div>{prefs?.sources.map((s, i) => <div className="source-row" key={s}><span className={`source-logo logo-${i}`}>{displaySources[s]?.[0]}</span><span>{displaySources[s]}</span><Check size={14}/></div>)}<p className="micro-copy">直连公开 RSS 与原文。不可用的来源会在 Trace 中如实记录。</p></div>
           <div className="trace-promo"><Code2 size={20}/><h3>摘要之外，过程透明。</h3><p>查看工具参数、来源抓取、耗时与模型 Token 用量。</p><button onClick={() => setTab("trace")}>打开 Agent Trace <ArrowRight size={14}/></button></div>
           {digest?.deliveries && <div className="card"><h3>本期送达记录</h3><button className="text-button" disabled={busy} onClick={resend}>检查 / 重试未送达推送 <RefreshCw size={12}/></button>{digest.deliveries.map(d => <div className="delivery-row" key={d.channel}><span>{d.channel === "email" ? "邮件" : "站内"}</span><Badge status={d.status}/>{d.error && <small>{d.error}</small>}</div>)}</div>}
         </aside></div>
       </>}
 
-      {tab === "preferences" && prefs && <form onSubmit={savePreferences} className="preferences-grid"><section className="card settings-card"><div className="section-heading"><h2>01 <span>内容偏好</span></h2><BookOpen size={19}/></div><label>关注主题<span className="field-hint">用逗号分隔，最多 8 个主题</span><input value={topics} onChange={e => setTopics(e.target.value)} placeholder="AI, LLM, Agent, 多模态" required/></label><label>新闻来源<span className="field-hint">选择 Agent 可以检索的公开来源</span></label><div className="source-options">{Object.entries(sourceNames).map(([id, label]) => <label className={`source-option ${prefs.sources.includes(id) ? "selected" : ""}`} key={id}><input type="checkbox" checked={prefs.sources.includes(id)} onChange={e => patch("sources", e.target.checked ? [...prefs.sources, id] : prefs.sources.filter(s => s !== id))}/><Globe2 size={17}/><span>{label}</span><Check size={15}/></label>)}</div><div className="form-row"><label>日报语言<select value={prefs.language} onChange={e => patch("language", e.target.value as "zh" | "en")}><option value="zh">简体中文</option><option value="en">English</option></select></label><label>最多新闻数<select value={prefs.max_articles} onChange={e => patch("max_articles", Number(e.target.value))}>{[1,2,3,4,5,6,7,8].map(v => <option key={v} value={v}>{v} 条</option>)}</select></label></div><label>新闻时间范围<select value={prefs.lookback_days} onChange={e => patch("lookback_days", Number(e.target.value))}>{[1,2,3,7,14].map(v => <option key={v} value={v}>最近 {v} 天</option>)}</select></label></section>
+      {tab === "preferences" && prefs && <form onSubmit={savePreferences} className="preferences-grid"><section className="card settings-card"><div className="section-heading"><h2>01 <span>内容偏好</span></h2><BookOpen size={19}/></div><label>关注主题<span className="field-hint">用逗号分隔，最多 8 个主题</span><input value={topics} onChange={e => setTopics(e.target.value)} placeholder="AI, LLM, Agent, 多模态" required/></label><label>新闻来源<span className="field-hint">选择 Agent 可以检索的公开来源</span></label><div className="source-options">{Object.entries(sourceNames).map(([id, label]) => <label className={`source-option ${prefs.sources.includes(id) ? "selected" : ""}`} key={id}><input type="checkbox" checked={prefs.sources.includes(id)} onChange={e => patch("sources", e.target.checked ? [...prefs.sources, id] : prefs.sources.filter(s => s !== id))}/><Globe2 size={17}/><span>{label}</span><Check size={15}/></label>)}</div><SubscriptionExtras prefs={prefs} sources={sources} reloadSources={reloadSources} change={values => setPrefs(p => p ? {...p, ...values} : p)}/><div className="form-row"><label>日报语言<select value={prefs.language} onChange={e => patch("language", e.target.value as "zh" | "en")}><option value="zh">简体中文</option><option value="en">English</option></select></label><label>最多新闻数<select value={prefs.max_articles} onChange={e => patch("max_articles", Number(e.target.value))}>{[1,2,3,4,5,6,7,8].map(v => <option key={v} value={v}>{v} 条</option>)}</select></label></div><label>新闻时间范围<select value={prefs.lookback_days} onChange={e => patch("lookback_days", Number(e.target.value))}>{[1,2,3,7,14].map(v => <option key={v} value={v}>最近 {v} 天</option>)}</select></label></section>
         <section className="card settings-card"><div className="section-heading"><h2>02 <span>送达方式</span></h2><Radio size={19}/></div><Toggle label="每日自动生成" note="服务运行时，在指定时刻生成；当天错过后会补跑一次。" checked={prefs.schedule_enabled} onChange={v => patch("schedule_enabled", v)}/><div className="form-row"><label>每日时间<input type="time" value={prefs.delivery_time} onChange={e => patch("delivery_time", e.target.value)} required/></label><label>时区<select value={prefs.timezone} onChange={e => patch("timezone", e.target.value)}>{["Asia/Shanghai", "Asia/Tokyo", "Asia/Singapore", "Europe/London", "America/New_York", "America/Los_Angeles", "UTC"].map(v => <option key={v}>{v}</option>)}</select></label></div><div className="divider"/><Toggle label="站内通知" note="日报完成后，在工作区收到通知。" checked={prefs.in_app_enabled} onChange={v => patch("in_app_enabled", v)}/><Toggle label="邮件推送" note={`仅发送至当前登录账户：${user.email}`} checked={prefs.email_enabled} onChange={v => patch("email_enabled", v)}/>{!health?.smtp_configured && <div className="info-note"><Mail size={16}/><span>尚未配置 SMTP。启用后会记录发送失败，不会显示虚假的送达状态。</span></div>}<div className="settings-submit"><button className="button primary" disabled={busy || !prefs.sources.length}>{busy ? <Loader2 className="spin" size={16}/> : <Check size={16}/>}保存订阅配置</button></div></section></form>}
 
       {tab === "history" && <section className="card archive-card"><div className="section-heading"><h2>日报档案</h2><span className="mini-label">YOUR KNOWLEDGE, COMPOUNDING.</span></div>{archive.length ? <><div className="archive-header"><span>日报 / 标题</span><span>生成时间</span><span/></div>{archive.map(d => <button key={d.id} className="archive-row" onClick={() => openDigest(d.id)}><span className="archive-date"><FileText size={19}/><span><small>{d.digest_date}</small><strong>{d.title}</strong></span></span><time>{stamp(d.created_at)}</time><ArrowRight size={17}/></button>)}</> : <Empty icon={<History size={32}/>} title="你的第一份日报，即将归档" text="所有生成的日报会保存在这里，随时回看和导出。"/>}<div className="pagination"><button className="button secondary" disabled={archivePage === 0} onClick={() => setArchivePage(p => p - 1)}>上一页</button><span>第 {archivePage + 1} 页</span><button className="button secondary" disabled={archive.length < 12} onClick={() => setArchivePage(p => p + 1)}>下一页</button></div></section>}

@@ -1,6 +1,7 @@
 import {test, expect} from "@playwright/test";
 import fs from "node:fs";
 import path from "node:path";
+const evidence = process.env.EVIDENCE_DIR || "../evidence";
 
 test("registration, persisted preferences, archive, trace and mobile layout", async ({page}) => {
   await page.goto("/");
@@ -23,14 +24,14 @@ test("registration, persisted preferences, archive, trace and mobile layout", as
   await page.setViewportSize({width: 390, height: 844});
   expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBeTruthy();
   await page.getByRole("button", {name: "日报工作台", exact: true}).click();
-  await page.screenshot({path: "../evidence/mobile-empty.png", fullPage: true});
+  await page.screenshot({path: `${evidence}/mobile-empty.png`, fullPage: true});
 });
 
 test("display actual DeepSeek digest and actual tool trace when live evidence exists", async ({page}) => {
-  const loginFile = path.resolve("../evidence/private/demo-login.json");
+  const loginFile = path.resolve(process.env.LIVE_LOGIN_FILE || "../evidence/private/demo-login.json");
   test.skip(!fs.existsSync(loginFile), "Run scripts/live_e2e.py first; no fabricated digest fallback.");
   const login = JSON.parse(fs.readFileSync(loginFile, "utf8"));
-  const live = JSON.parse(fs.readFileSync(path.resolve("../evidence/live-e2e.json"), "utf8"));
+  const live = JSON.parse(fs.readFileSync(path.resolve(process.env.LIVE_REPORT_FILE || "../evidence/live-e2e.json"), "utf8"));
   expect(live.status).toBe("completed");
   expect(live.digest.items.length).toBeGreaterThan(0);
   await page.goto("/");
@@ -39,13 +40,13 @@ test("display actual DeepSeek digest and actual tool trace when live evidence ex
   await page.getByRole("button", {name: "进入工作台"}).click();
   await expect(page.getByText("你的 AI 简报", {exact: true})).toBeVisible();
   await expect(page.locator(".news-item")).toHaveCount(live.digest.items.length);
-  await page.screenshot({path: "../evidence/dashboard.png", fullPage: true});
+  await page.screenshot({path: `${evidence}/dashboard.png`, fullPage: true});
   await page.locator(".evidence summary").first().click();
   await expect(page.locator(".evidence code").first()).toContainText("SHA-256");
   await page.getByRole("button", {name: "查看生成轨迹"}).click();
   await expect(page.locator(".trace-event")).not.toHaveCount(0);
   await expect(page.getByText("search_news", {exact: true}).first()).toBeVisible();
-  await page.screenshot({path: "../evidence/agent-trace.png", fullPage: true});
+  await page.screenshot({path: `${evidence}/agent-trace.png`, fullPage: true});
   await page.getByRole("button", {name: "通知", exact: true}).click();
   await expect(page.locator(".notice")).toHaveCount(1);
 });
